@@ -3,6 +3,7 @@
 
 node_modules/
 npm-debug.log
+/.sass-cache
 
 NODE_PATH
 
@@ -10,4 +11,5 @@ server/https-cert/
 server/creds.json
 
 client-compiled/
-
+out-tsc/
+tmp/
