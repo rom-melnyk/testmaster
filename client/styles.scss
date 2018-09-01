@@ -1,1 +1,6 @@
-// @import "~bootstrap/dist/css/bootstrap.min.css";
+// Bootstrap overrides
+// see `node_modules/bootstrap/scss/_variables.scss`
+
+// original Bootstrap
+//@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap/dist/css/bootstrap.min.css";
