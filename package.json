@@ -1,0 +1,25 @@
+{
+  "name": "testmaster",
+  "version": "1.0.0",
+  "description": "TestMaster helps managing tests",
+  "main": "server/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ggit+https://ithub.com/rom-melnyk/testmaster.git"
+  },
+  "keywords": [
+    "testmaster",
+    "test",
+    "tests",
+    "cycle",
+    "management",
+    "regression",
+    "suite"
+  ],
+  "author": "Roman Melnyk <https://melnyk.site>",
+  "license": "UNLICENSED",
+  "private": true
+}

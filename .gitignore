@@ -1,0 +1,13 @@
+.idea/
+.vscode/
+
+node_modules/
+npm-debug.log
+
+NODE_PATH
+
+server/https-cert/
+server/creds.json
+
+client-compiled/
+
