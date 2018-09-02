@@ -1,0 +1,10 @@
+@import "../app.component.config";
+
+footer {
+  @extend .header-footer-stripe;
+  margin-top: 2rem;
+
+  .container {
+    @extend .header-footer-container;
+  }
+}
