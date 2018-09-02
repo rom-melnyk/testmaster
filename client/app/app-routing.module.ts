@@ -10,6 +10,8 @@ import { RegressionCyclesComponent } from './components/regression-cycles/regres
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'test-cases', component: TestCasesComponent },
+  // { path: 'test-cases/:id', component: TestCaseComponent },
+  // { path: 'test-cases/new', component: NewTestCaseComponent },
   { path: 'test-suites', component: TestSuitesComponent },
   { path: 'test-plans', component: TestPlansComponent },
   { path: 'regression-cycles', component: RegressionCyclesComponent },

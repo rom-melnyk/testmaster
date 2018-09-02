@@ -13,6 +13,8 @@ import { HomeComponent } from './components/home/home.component';
 import { TestSuitesComponent } from './components/test-suites/test-suites.component';
 import { TestPlansComponent } from './components/test-plans/test-plans.component';
 import { RegressionCyclesComponent } from './components/regression-cycles/regression-cycles.component';
+import { TestCaseComponent } from './components/test-case/test-case.component';
+import { NewTestCaseComponent } from './components/new-test-case/new-test-case.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { RegressionCyclesComponent } from './components/regression-cycles/regres
     HomeComponent,
     TestSuitesComponent,
     TestPlansComponent,
-    RegressionCyclesComponent
+    RegressionCyclesComponent,
+    TestCaseComponent,
+    NewTestCaseComponent
   ],
   imports: [
     // NgbModule,
