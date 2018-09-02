@@ -1,4 +1,4 @@
-@import "../app.component.config";
+@import "../header/header-footer.styles";
 
 footer {
   @extend .header-footer-stripe;
@@ -6,5 +6,12 @@ footer {
 
   .container {
     @extend .header-footer-container;
+    font-size: .75rem;
+
+    .logo {
+      width: 2em;
+      height: 2em;
+      margin-right: 1em;
+    }
   }
 }

@@ -2,13 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'tm-header',
-  template: `
-    <header class="bg-dark text-light">
-      <div class="container">
-        TestMaster &copy; 2018
-      </div>
-    </header>
-  `,
+  templateUrl: './header.component.html',
   styleUrls: [ './header.component.scss' ]
 })
 export class HeaderComponent implements OnInit {

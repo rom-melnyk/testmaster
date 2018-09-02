@@ -1,4 +1,5 @@
-@import "../app.component.config";
+@import "header-footer.styles";
+@import "../../../shared.styles";
 
 header {
   @extend .header-footer-stripe;
@@ -6,5 +7,10 @@ header {
 
   .container {
     @extend .header-footer-container;
+
+    .logo {
+      width: 3rem;
+      height: 3rem;
+    }
   }
 }
