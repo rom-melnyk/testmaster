@@ -6,7 +6,7 @@ header {
   margin-bottom: 2rem;
 
   .container {
-    @extend .header-footer-container;
+    @extend .top-level-container;
 
     .logo {
       width: 3rem;

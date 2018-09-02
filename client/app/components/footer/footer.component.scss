@@ -5,7 +5,7 @@ footer {
   margin-top: 2rem;
 
   .container {
-    @extend .header-footer-container;
+    @extend .top-level-container;
     font-size: .75rem;
 
     .logo {
