@@ -7,12 +7,22 @@ import { AppComponent } from './components/app.component';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { TestCasesComponent } from './components/views/test-cases/test-cases.component';
+import { HomeComponent } from './components/views/home/home.component';
+import { TestSuitesComponent } from './components/views/test-suites/test-suites.component';
+import { TestPlansComponent } from './components/views/test-plans/test-plans.component';
+import { RegressionCyclesComponent } from './components/views/regression-cycles/regression-cycles.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    TestCasesComponent,
+    HomeComponent,
+    TestSuitesComponent,
+    TestPlansComponent,
+    RegressionCyclesComponent
   ],
   imports: [
     // NgbModule,
