@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'tm-regression-cycles',
   template: `
-    <div class="top-level-container">
+    <div class="container">
       <h1>Regression Cycles</h1>
     </div>
   `,

@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'tm-test-plans',
   template: `
-    <div class="top-level-container">
+    <div class="container">
       <h1>Test Plans</h1>
     </div>
   `,

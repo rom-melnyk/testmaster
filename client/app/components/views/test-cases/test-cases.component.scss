@@ -3,3 +3,7 @@
 :host {
   display: block;
 }
+
+.container {
+  @extend .top-level-container;
+}

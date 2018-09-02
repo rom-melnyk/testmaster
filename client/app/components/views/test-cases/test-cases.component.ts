@@ -1,19 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+import { TestCasesService } from '../../../services/test-cases.service';
+import { TestCase } from '../../../models/test-case.model';
 
 @Component({
   selector: 'tm-test-cases',
-  template: `
-    <div class="top-level-container">
-      <h1>Test Cases</h1>
-    </div>
-  `,
+  templateUrl: './test-cases.component.html',
   styleUrls: [ './test-cases.component.scss' ]
 })
 export class TestCasesComponent implements OnInit {
+  public testCases: TestCase[] = [];
 
-  constructor() { }
+  constructor(
+    private testCasesService: TestCasesService,
+  ) { }
 
   ngOnInit() {
+    this.testCasesService.getTestCases()
+      .subscribe((testCases: TestCase[]) => {
+        this.testCases = testCases;
+      });
   }
 
 }

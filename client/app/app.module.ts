@@ -3,8 +3,9 @@ import { NgModule } from '@angular/core';
 
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './components/app.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from "@angular/common/http";
+import { AppComponent } from './components/app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { TestCasesComponent } from './components/views/test-cases/test-cases.component';
@@ -28,6 +29,7 @@ import { RegressionCyclesComponent } from './components/views/regression-cycles/
     // NgbModule,
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [],
