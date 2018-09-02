@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TestCasesService } from '../../../services/test-cases.service';
-import { TestCase } from '../../../models/test-case.model';
+import { TestCasesService } from '../../services/test-cases.service';
+import { TestCase } from '../../models/test-case.model';
 
 @Component({
   selector: 'tm-test-cases',
