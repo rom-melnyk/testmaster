@@ -1,0 +1,9 @@
+@import "../shared/top-level-container.styles";
+
+:host {
+  display: block;
+}
+
+.container {
+  @extend .top-level-container;
+}

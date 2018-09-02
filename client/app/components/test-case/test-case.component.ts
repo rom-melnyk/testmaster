@@ -2,12 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'tm-test-case',
-  template: `
-    <p>
-      test-case works!
-    </p>
-  `,
-  styles: []
+  templateUrl: './test-case.component.html',
+  styleUrls: [ './test-case.component.scss' ]
 })
 export class TestCaseComponent implements OnInit {
 

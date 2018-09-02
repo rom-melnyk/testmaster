@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './components/home/home.component';
 import { TestCasesComponent } from './components/test-cases/test-cases.component';
+import { TestCaseComponent } from './components/test-case/test-case.component';
+import { NewTestCaseComponent } from './components/new-test-case/new-test-case.component';
 import { TestSuitesComponent } from './components/test-suites/test-suites.component';
 import { TestPlansComponent } from './components/test-plans/test-plans.component';
 import { RegressionCyclesComponent } from './components/regression-cycles/regression-cycles.component';
@@ -10,8 +12,8 @@ import { RegressionCyclesComponent } from './components/regression-cycles/regres
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'test-cases', component: TestCasesComponent },
-  // { path: 'test-cases/:id', component: TestCaseComponent },
-  // { path: 'test-cases/new', component: NewTestCaseComponent },
+  { path: 'test-cases/new', component: NewTestCaseComponent },
+  { path: 'test-cases/:id', component: TestCaseComponent },
   { path: 'test-suites', component: TestSuitesComponent },
   { path: 'test-plans', component: TestPlansComponent },
   { path: 'regression-cycles', component: RegressionCyclesComponent },
