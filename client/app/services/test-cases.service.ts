@@ -14,12 +14,6 @@ export class TestCasesService {
   ) { }
 
   getTestCases(): Observable<TestCase[]> {
-    // return this.http.get<Hero[]>(this.url);
-    return of([
-      { id: 1, title: 'A pretty bug', description: 'Some pretty descr' },
-      { id: 2, title: 'Another pretty bug', description: 'Another pretty descr' },
-      { id: 3, title: 'An ugly bug', description: 'Some ugly descr' },
-      { id: 4, title: 'A nice bug', description: 'Some nide descr' },
-    ]);
+    return this.http.get<TestCase[]>(this.url);
   }
 }
