@@ -49,6 +49,9 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true
+            },
+            "development": {
+              "watch": true
             }
           }
         },
