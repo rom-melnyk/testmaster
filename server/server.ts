@@ -1,2 +1,10 @@
-const msg: string = 'Me work!';
-console.log(msg);
+import { sequelize } from './db';
+
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
