@@ -1,9 +1,9 @@
 import Sequelize from 'sequelize';
 const { database } = require('./creds');
 
-export const sequelize = new Sequelize(database.database, database.user, database.password, {
+export const sequelize = new Sequelize(database.database, database.username, database.password, {
   host: database.host,
-  dialect: 'mysql',
+  dialect: database.dialect,
   operatorsAliases: false,
 
   pool: {

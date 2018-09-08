@@ -11,7 +11,7 @@ import * as cookieParser from 'cookie-parser';
 import httpsOptions from './https-cert/index';
 import { testCasesRouter } from './api/test-cases';
 
-import { sequelize } from './db';
+import { sequelize } from './db/index';
 
 const app = express();
 
