@@ -10,5 +10,4 @@ const dbConfig = Object.assign({}, database, {
 module.exports = {
   development: dbConfig,
   production: dbConfig,
-  defaultModelOptions: {}
 };

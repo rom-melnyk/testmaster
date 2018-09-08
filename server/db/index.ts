@@ -1,5 +1,5 @@
 import Sequelize from 'sequelize';
-const { database } = require('./creds');
+const { database } = require('../creds');
 
 export const sequelize = new Sequelize(database.database, database.username, database.password, {
   host: database.host,
@@ -13,3 +13,9 @@ export const sequelize = new Sequelize(database.database, database.username, dat
     idle: 10000
   },
 });
+
+export const defaultModelOptions = {
+  sequelize,
+  underscored: true,
+  timestamps: false,
+};
