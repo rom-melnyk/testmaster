@@ -6,45 +6,8 @@ TestMaster helps managing tests.
 
 # Architecture
 
-## DB structure
-
-- test\_cases
-   - id,
-   - title,
-   - description,
-- test\_suites
-   - id,
-   - title,
-   - description,
-   - test\_cases (JSON, array),
-- test\_plans
-   - id,
-   - title,
-   - description,
-   - created\_date,
-   - test\_suits (JSON array),
-   - test\_cases,
-- regression\_cycles  
-   **TBD!**
-   - id,
-   - title,
-   - description,
-   - created\_date,
-   - test\_suits (JSON array),
-   - test\_cases,
-- test\_results
-   - id,
-   - test\_case\_id,
-   - test\_suite\_id,
-   - test\_plan\_id,
-   - regression\_cycle\_id,
-- comments
-   - id,
-   - author,
-   - date,
-   - payload,
-   - destination (determining where should the comment go),
-   - destination_id,
+- [DB structure](./docs/DB_STRUCTURE.md)
+- [creds.json](./docs/CREDS.md)
 
 ## Server architecture
 

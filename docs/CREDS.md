@@ -10,7 +10,8 @@ Create it manually before starting the server.
     "database": "...",
     "user": "...",
     "password": "...",
-    "port": ...
+    "port": ...,
+    "dialect": "mysql"
   }
 }
 ```

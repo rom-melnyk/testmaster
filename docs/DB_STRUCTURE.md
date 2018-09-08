@@ -1,0 +1,39 @@
+# DB structure
+
+- test\_cases
+   - id,
+   - title,
+   - description,
+- test\_suites
+   - id,
+   - title,
+   - description,
+   - test\_cases _(JSON, array),_
+- test\_plans
+   - id,
+   - title,
+   - description,
+   - created\_date,
+   - test\_suits _(JSON array),_
+   - test\_cases,
+- regression\_cycles  
+   **TBD!**
+   - id,
+   - title,
+   - description,
+   - created\_date,
+   - test\_suits _(JSON array),_
+   - test\_cases,
+- test\_results
+   - id,
+   - test\_case\_id,
+   - test\_suite\_id,
+   - test\_plan\_id,
+   - regression\_cycle\_id,
+- comments
+   - id,
+   - author,
+   - date,
+   - payload,
+   - destination _(determining where should the comment go),_
+   - destination_id,
