@@ -19,8 +19,16 @@ Client app is an Angular 6 app. The NG-CLI task compiles it into `client-compile
 
 
 
+# Dev process
+
+1. Apply DB changes:
+   1. `npm run sqlz -- db:create` at the very beginning of the project,
+   1. `npm run sqlz -- db:migrate` to apply DB updates.  
+      `npm run sqlz -- db:migrate:undo` to undo last migration.
+
+
+
 # Credits
 
 **Author:** Roman Melnyk ([site](http://melnyk.site)).  
 The app is developed for integration with ThePeopleGroup software development process.
-
