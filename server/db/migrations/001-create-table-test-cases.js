@@ -11,7 +11,7 @@ module.exports = {
         autoIncrement: true
       },
       title: Sequelize.STRING,
-      description: Sequelize.STRING,
+      description: Sequelize.TEXT,
     });
   },
 
