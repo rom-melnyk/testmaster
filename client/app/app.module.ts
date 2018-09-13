@@ -15,6 +15,7 @@ import { TestPlansComponent } from './components/test-plans/test-plans.component
 import { RegressionCyclesComponent } from './components/regression-cycles/regression-cycles.component';
 import { TestCaseComponent } from './components/test-case/test-case.component';
 import { NewTestCaseComponent } from './components/new-test-case/new-test-case.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -23,11 +24,12 @@ import { NewTestCaseComponent } from './components/new-test-case/new-test-case.c
     FooterComponent,
     TestCasesComponent,
     HomeComponent,
+    NotFoundComponent,
     TestSuitesComponent,
     TestPlansComponent,
     RegressionCyclesComponent,
     TestCaseComponent,
-    NewTestCaseComponent
+    NewTestCaseComponent,
   ],
   imports: [
     // NgbModule,
