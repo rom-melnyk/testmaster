@@ -4,36 +4,33 @@ import { InputModels } from '../../../models/form-element';
 
 @Component({
   selector: 'tm-form',
-  template: `
-    <form (ngSubmit)="onSubmit()" [formGroup]="form">
-      <ng-container *ngFor="let inputModel of inputModels">
-        <ng-container [ngSwitch]="inputModel.type">
-          <tm-string-input *ngSwitchCase="'string'" [form]="form" [inputModel]="inputModel"></tm-string-input>
-          <div class="alert alert-danger" *ngSwitchDefault>
-            Unknown input type: "{{inputModel.type}}".
-          </div>
-        </ng-container>
-      </ng-container>
-      <div class="row form-group no-gutters justify-content-end">
-        <div class="btn-group">
-          <a href="javascript:history.back();" class="btn btn-secondary">&larr;</a>
-          <button class="btn btn-success" type="submit" [disabled]="!form.valid">Save</button>
-        </div>
-      </div>
-    </form>
-  `,
+  templateUrl: './form.component.html',
   styles: [
     `:host { display: block; }`,
     `form { display: block; }`
   ]
 })
 export class FormComponent implements OnInit {
-  @Input() inputModels: InputModels;
+  @Input() private inputModels: InputModels;
+  public normalizedInputModels: InputModels;
   public form: FormGroup;
 
   constructor() { }
 
   ngOnInit() {
+    this.normalizedInputModels = this.inputModels.map((inputModel) => {
+      const comment = inputModel.messages && inputModel.messages.comment
+        ? inputModel.messages.comment
+        : '';
+      const invalid = inputModel.messages && inputModel.messages.invalid
+        ? inputModel.messages.invalid
+        : ( inputModel.required
+            ? 'Value required'
+            : ''
+        );
+      return Object.assign({}, inputModel, { messages: { comment, invalid } });
+    });
+
     const formGroup = this.inputModels.reduce((accum, inputModel) => {
       const validator = inputModel.required ? Validators.required : undefined;
       accum[inputModel.name] = new FormControl('', validator);

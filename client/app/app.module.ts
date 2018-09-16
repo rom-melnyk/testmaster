@@ -21,7 +21,6 @@ import { NewTestCaseComponent } from './components/new-test-case/new-test-case.c
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
 import { FormComponent } from './components/forms/form-builder/form.component';
-import { StringInputComponent } from './components/forms/string-input/string-input.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +38,6 @@ import { StringInputComponent } from './components/forms/string-input/string-inp
     NewTestCaseComponent,
 
     FormComponent,
-    StringInputComponent,
   ],
   imports: [
     // NgbModule,

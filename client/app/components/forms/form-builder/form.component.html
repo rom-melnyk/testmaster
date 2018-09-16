@@ -1,0 +1,28 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <ng-container *ngFor="let inputModel of normalizedInputModels">
+    <div class="row form-group" [formGroup]="form">
+      <label for="{{inputModel.name}}" class="col-3 col-form-label text-capitalize">
+        {{inputModel.label || inputModel.name}}:
+        <span class="text-danger required-label" *ngIf="inputModel.required">*</span>
+      </label>
+      <div class="col-9">
+        <ng-container [ngSwitch]="inputModel.type">
+          <input class="form-control" type="text" id="{{inputModel.name}}" *ngSwitchCase="'string'" [formControlName]="inputModel.name" />
+          <textarea class="form-control" type="text" id="{{inputModel.name}}" *ngSwitchCase="'text'" [formControlName]="inputModel.name">
+          </textarea>
+          <div class="alert alert-danger" *ngSwitchDefault>
+            Unknown input type: "{{inputModel.type}}".
+          </div>
+        </ng-container>
+        <div class="comment" *ngIf="inputModel.messages.comment">{{inputModel.messages.comment}}</div>
+        <div class="error" *ngIf="inputModel.messages.invalid">{{inputModel.messages.invalid}}</div>
+      </div>
+    </div>
+  </ng-container>
+  <div class="row form-group no-gutters justify-content-end">
+    <div class="btn-group">
+      <a href="javascript:history.back();" class="btn btn-secondary">&larr;</a>
+      <button class="btn btn-success" type="submit" [disabled]="!form.valid">Save</button>
+    </div>
+  </div>
+</form>
