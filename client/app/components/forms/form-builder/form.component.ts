@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { InputModels } from '../../../models/form-element';
 
 @Component({
-  selector: 'tm-form-builder',
+  selector: 'tm-form',
   template: `
     <form (ngSubmit)="onSubmit()" [formGroup]="form">
       <ng-container *ngFor="let inputModel of inputModels">
@@ -27,7 +27,7 @@ import { InputModels } from '../../../models/form-element';
     `form { display: block; }`
   ]
 })
-export class FormBuilderComponent implements OnInit {
+export class FormComponent implements OnInit {
   @Input() inputModels: InputModels;
   public form: FormGroup;
 

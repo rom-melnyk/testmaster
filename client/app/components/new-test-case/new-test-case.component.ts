@@ -6,7 +6,7 @@ import { TestCaseForm } from '../../models/test-case.model';
   template: `
     <div class="container">
       <h1>New Test Case</h1>
-      <tm-form-builder [inputModels]="testCaseForm"></tm-form-builder>
+      <tm-form [inputModels]="testCaseForm"></tm-form>
     </div>
   `,
   styleUrls: [ './new-test-case.component.scss' ]

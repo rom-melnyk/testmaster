@@ -20,7 +20,7 @@ import { TestCaseComponent } from './components/test-case/test-case.component';
 import { NewTestCaseComponent } from './components/new-test-case/new-test-case.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
-import { FormBuilderComponent } from './components/forms/form-builder/form-builder.component';
+import { FormComponent } from './components/forms/form-builder/form.component';
 import { StringInputComponent } from './components/forms/string-input/string-input.component';
 
 @NgModule({
@@ -38,7 +38,7 @@ import { StringInputComponent } from './components/forms/string-input/string-inp
     TestCaseComponent,
     NewTestCaseComponent,
 
-    FormBuilderComponent,
+    FormComponent,
     StringInputComponent,
   ],
   imports: [

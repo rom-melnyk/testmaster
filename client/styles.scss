@@ -6,6 +6,14 @@
 //@import "~bootstrap/dist/css/bootstrap.min.css";
 
 // ------------- forms -------------
+.required-label {
+  display: inline-block;
+  margin: 0 0 0 .25rem;
+  vertical-align: middle;
+  font-size: 2rem;
+  line-height: 1rem;
+}
+
 input {
   &.ng-invalid.ng-touched {
     border: 1px solid $danger;

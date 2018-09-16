@@ -6,23 +6,18 @@ import { StringInputModel } from '../../../models/form-element';
   selector: 'tm-string-input',
   template: `
     <div class="row form-group" [formGroup]="form">
-      <label for="{{inputModel.name}}" class="col-4 col-form-label text-capitalize">
+      <label for="{{inputModel.name}}" class="col-3 col-form-label text-capitalize">
         {{inputModel.label || inputModel.name}}
-        <strong class="text-danger required-label" *ngIf="inputModel.required">*</strong>
+        <span class="text-danger required-label" *ngIf="inputModel.required">*</span>
       </label>
-      <div class="col-8">
+      <div class="col-9">
         <input class="form-control" type="text" id="{{inputModel.name}}" [formControlName]="inputModel.name">
         <div class="comment">{{comment}}</div>
         <div class="error">{{invalidMessage}}</div>
       </div>
     </div>
   `,
-  styles: [
-    `.required-label {
-      display: inline-block;
-      margin-left: .25em;
-    }`
-  ]
+  styles: []
 })
 export class StringInputComponent implements OnInit {
   @Input() inputModel: StringInputModel;
