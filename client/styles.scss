@@ -2,5 +2,39 @@
 // see `node_modules/bootstrap/scss/_variables.scss`
 
 // original Bootstrap
-//@import "~bootstrap/scss/bootstrap";
-@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~bootstrap/scss/bootstrap";
+//@import "~bootstrap/dist/css/bootstrap.min.css";
+
+// ------------- forms -------------
+input {
+  &.ng-invalid.ng-touched {
+    border: 1px solid $danger;
+
+    &:focus {
+      box-shadow: 0 0 0 0.2rem lighten($danger, 30%);
+    }
+
+    & ~ .comment {
+      display: none;
+    }
+
+    & ~ .error {
+      display: block;
+      color: $danger;
+    }
+  }
+
+  & ~ div {
+    margin: .375rem .75rem 0;
+    font-size: $font-size-sm;
+  }
+
+  & + .comment {
+    color: $secondary;
+  }
+
+  & ~ .error {
+    display: none;
+    color: $danger;
+  }
+}

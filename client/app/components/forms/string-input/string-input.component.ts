@@ -5,36 +5,43 @@ import { StringInputModel } from '../../../models/form-element';
 @Component({
   selector: 'tm-string-input',
   template: `
-    <div class="row" [formGroup]="form">
-      <div class="col-4">
-        <label for="{{inputModel.name}}">{{inputModel.label || inputModel.name}}</label>
-      </div>
+    <div class="row form-group" [formGroup]="form">
+      <label for="{{inputModel.name}}" class="col-4 col-form-label text-capitalize">
+        {{inputModel.label || inputModel.name}}
+        <strong class="text-danger required-label" *ngIf="inputModel.required">*</strong>
+      </label>
       <div class="col-8">
-        <input type="text" id="{{inputModel.name}}" [formControlName]="inputModel.name">
-        <div class="errorMessage" *ngIf="!isValid()">{{messages.invalid}}</div>
+        <input class="form-control" type="text" id="{{inputModel.name}}" [formControlName]="inputModel.name">
+        <div class="comment">{{comment}}</div>
+        <div class="error">{{invalidMessage}}</div>
       </div>
     </div>
   `,
-  styles: []
+  styles: [
+    `.required-label {
+      display: inline-block;
+      margin-left: .25em;
+    }`
+  ]
 })
 export class StringInputComponent implements OnInit {
   @Input() inputModel: StringInputModel;
   @Input() form: FormGroup;
-  public messages: { explain: string; invalid: string };
+  public comment: string;
+  public invalidMessage: string;
 
   constructor() { }
 
   ngOnInit() {
-    const explain = this.inputModel.messages && this.inputModel.messages.explain
-      ? this.inputModel.messages.explain
+    this.comment = this.inputModel.messages && this.inputModel.messages.comment
+      ? this.inputModel.messages.comment
       : `Enter the ${this.inputModel.name}`;
-    const invalid = this.inputModel.messages && this.inputModel.messages.invalid
+    this.invalidMessage = this.inputModel.messages && this.inputModel.messages.invalid
       ? this.inputModel.messages.invalid
       : ( this.inputModel.required
         ? 'Value required'
         : 'Invalid value'
       );
-    this.messages = { explain, invalid };
   }
 
   isValid() {

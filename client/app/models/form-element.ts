@@ -4,7 +4,7 @@ interface InputModel {
   label?: string;
   defaultValue?: any;
   required?: boolean;
-  messages: { explain?: string; invalid?: string };
+  messages: { comment?: string; invalid?: string };
 }
 
 export interface StringInputModel extends InputModel {
