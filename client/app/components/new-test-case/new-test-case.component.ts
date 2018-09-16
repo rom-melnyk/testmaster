@@ -1,22 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { TestCaseForm } from '../../models/test-case.model';
+import { TestCasesService } from '../../services/test-cases.service';
 
 @Component({
   selector: 'tm-new-test-case',
   template: `
     <div class="container">
       <h1>New Test Case</h1>
-      <tm-form [inputModels]="testCaseForm"></tm-form>
+      <tm-form [inputModels]="testCaseForm" [onSubmit]="onSubmit"></tm-form>
     </div>
   `,
   styleUrls: [ './new-test-case.component.scss' ]
 })
 export class NewTestCaseComponent implements OnInit {
   public readonly testCaseForm = TestCaseForm;
+  public onSubmit: (data: any) => void;
 
-  constructor() { }
+  constructor(
+    private testCasesService: TestCasesService,
+  ) { }
 
   ngOnInit() {
+    this.onSubmit = (testCase) => {
+      this.testCasesService.insertTestCase(testCase)
+        .subscribe((data) => {
+          if (data.error) {
+            console.error(data);
+          }
+          history.back();
+        });
+    };
   }
-
 }

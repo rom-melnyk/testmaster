@@ -15,4 +15,12 @@ testCasesRouter.get('/', (req, res) => {
   });
 });
 
+testCasesRouter.post('/', (req, res) => {
+  TestCase.upsert(req.body).then((result) => {
+    res.send({ result });
+  }).catch((e) => {
+    sendError(res, 'DB error', e);
+  });
+});
+
 export { testCasesRouter };

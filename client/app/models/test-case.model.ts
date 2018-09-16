@@ -8,7 +8,7 @@ export interface TestCase {
 
 export const TestCaseForm: InputModels = [
   <StringInputModel>{
-    name: 'name',
+    name: 'title',
     type: 'string',
     required: true,
   },

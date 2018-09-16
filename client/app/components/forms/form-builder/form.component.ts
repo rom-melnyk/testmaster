@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { InputModels } from '../../../models/form-element';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'tm-form',
@@ -11,9 +12,10 @@ import { InputModels } from '../../../models/form-element';
   ]
 })
 export class FormComponent implements OnInit {
-  @Input() private inputModels: InputModels;
   public normalizedInputModels: InputModels;
   public form: FormGroup;
+  @Input() private inputModels: InputModels;
+  @Input() onSubmit: (any) => Observable<any>;
 
   constructor() { }
 
@@ -39,7 +41,9 @@ export class FormComponent implements OnInit {
     this.form = new FormGroup(formGroup);
   }
 
-  onSubmit() {
-    console.log('Submit:', this.form.value);
+  _onSubmit() {
+    if (this.onSubmit) {
+      this.onSubmit(this.form.value);
+    }
   }
 }
