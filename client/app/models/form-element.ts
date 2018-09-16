@@ -1,28 +1,30 @@
-interface InputElement {
+interface InputModel {
   name: string;
+  type: 'string' | 'text' | 'number' | 'dropdown';
   label?: string;
   defaultValue?: any;
   required?: boolean;
-};
+  messages: { explain?: string; invalid?: string };
+}
 
-export interface StringInput extends InputElement {
+export interface StringInputModel extends InputModel {
   type: 'string';
 }
 
-export interface TextInput extends InputElement {
+export interface TextInputModel extends InputModel {
   type: 'text';
 }
 
-export interface NumberInput extends InputElement {
+export interface NumberInputModel extends InputModel {
   type: 'number';
   min: number;
   max: number;
   step?: number;
 }
 
-export interface DropdownInput extends InputElement {
+export interface DropdownInputModel extends InputModel {
   type: 'dropdown';
   options: Array<{ name: string; value: string | number }>;
 }
 
-export type InputElements = InputElement[];
+export type InputModels = InputModel[];

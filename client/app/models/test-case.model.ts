@@ -1,4 +1,4 @@
-import { InputElements, StringInput, TextInput } from './form-element';
+import { InputModels, StringInputModel, TextInputModel } from './form-element';
 
 export interface TestCase {
   id: number;
@@ -6,13 +6,13 @@ export interface TestCase {
   description: string;
 }
 
-export const TestCaseFormSkeleton: InputElements = [
-  <StringInput>{
+export const TestCaseForm: InputModels = [
+  <StringInputModel>{
     name: 'name',
     type: 'string',
     required: true,
   },
-  <TextInput>{
+  <TextInputModel>{
     name: 'description',
     type: 'text',
   },
