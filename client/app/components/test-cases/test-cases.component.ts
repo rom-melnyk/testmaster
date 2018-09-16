@@ -16,9 +16,10 @@ export class TestCasesComponent implements OnInit {
 
   ngOnInit() {
     this.testCasesService.getTestCases()
-      .subscribe((testCases: TestCase[]) => {
+      .then((testCases: TestCase[]) => {
         this.testCases = testCases;
-      });
+      })
+      .catch(console.error);
   }
 
 }

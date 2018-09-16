@@ -23,10 +23,9 @@ export class NewTestCaseComponent implements OnInit {
   ngOnInit() {
     this.onSubmit = (testCase) => {
       this.testCasesService.insertTestCase(testCase)
-        .subscribe((data) => {
-          if (data.error) {
-            console.error(data);
-          }
+        .then((data) => {})
+        .catch(console.error)
+        .then(() => {
           history.back();
         });
     };
