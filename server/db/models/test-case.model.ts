@@ -8,8 +8,8 @@ export const TestCase = sequelize.define('test_cases', {
     autoIncrement: true,
 
   },
-    title: Sequelize.STRING,
-    description: Sequelize.TEXT,
+  title: Sequelize.STRING,
+  description: Sequelize.TEXT,
   },
   defaultModelOptions
 );
