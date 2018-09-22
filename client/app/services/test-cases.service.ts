@@ -14,17 +14,34 @@ export class TestCasesService {
   ) { }
 
   getTestCases(): Promise<TestCase[]> {
-    return this.http.get<TestCase[]>(this.url).toPromise();
+    return this.http
+      .get<TestCase[]>(this.url)
+      .toPromise();
   }
 
-  insertTestCase(testCase: any): Promise<any> {
-    const payload = this.stripPayload(testCase);
-    return this.http.post<any>(this.url, payload).toPromise();
+  getTestCase(id: number): Promise<TestCase> {
+    return this.http
+      .get<TestCase>(`${this.url}/${id}`)
+      .toPromise();
   }
 
-  updateTestCase(testCase: TestCase): Promise<any> {
+  createTestCase(testCase: any): Promise<TestCase> {
     const payload = this.stripPayload(testCase);
-    return this.http.put<any>(`${this.url}/${testCase.id}`, payload).toPromise();
+    return this.http
+      .post<TestCase>(this.url, payload)
+      .toPromise();
+  }
+  updateTestCase(testCase: TestCase): Promise<{ updated: number }> {
+    const payload = this.stripPayload(testCase);
+    return this.http
+      .put<{ updated: number }>(`${this.url}/${testCase.id}`, payload)
+      .toPromise();
+  }
+
+  deleteTestCase(id: number): Promise<{ deleted: number }> {
+    return this.http
+      .delete<{ deleted: number }>(`${this.url}/${id}`)
+      .toPromise();
   }
 
   private stripPayload(testCase: TestCase): any {

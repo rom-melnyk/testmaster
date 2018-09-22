@@ -20,7 +20,7 @@ testCasesRouter.get('/:id', (req, res) => {
     if (testCase) {
       res.send(testCase);
     } else {
-      sendError(res, 'Not found');
+      return sendError(res, 'Not found');
     }
   }).catch((e) => {
     sendError(res, 'DB error', e);

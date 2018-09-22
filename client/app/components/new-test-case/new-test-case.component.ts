@@ -22,7 +22,7 @@ export class NewTestCaseComponent implements OnInit {
 
   ngOnInit() {
     this.onSubmit = (testCase) => {
-      this.testCasesService.insertTestCase(testCase)
+      this.testCasesService.createTestCase(testCase)
         .then((data) => {})
         .catch(console.error)
         .then(() => {
