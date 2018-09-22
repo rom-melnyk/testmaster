@@ -8,6 +8,7 @@ import { TestCase } from '../../models/test-case.model';
   styleUrls: [ './test-cases.component.scss' ]
 })
 export class TestCasesComponent implements OnInit {
+  public isLoading: boolean;
   public testCases: TestCase[] = [];
 
   constructor(
@@ -15,11 +16,18 @@ export class TestCasesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.isLoading = true;
     this.testCasesService.getTestCases()
       .then((testCases: TestCase[]) => {
         this.testCases = testCases;
       })
-      .catch(console.error);
+      .catch((e) => {
+        console.error(e);
+        this.testCases = null;
+      })
+      .then(() => {
+        this.isLoading = false;
+      });
   }
 
 }

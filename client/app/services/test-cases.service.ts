@@ -9,6 +9,10 @@ import { cloneWithoutKeys } from '../../../shared/utils';
 export class TestCasesService {
   private url = '/api/test-cases';
 
+  private static stripPayload(testCase: TestCase): any {
+    return cloneWithoutKeys(testCase, ['id']);
+  }
+
   constructor(
     private http: HttpClient
   ) { }
@@ -26,13 +30,14 @@ export class TestCasesService {
   }
 
   createTestCase(testCase: any): Promise<TestCase> {
-    const payload = this.stripPayload(testCase);
+    const payload = TestCasesService.stripPayload(testCase);
     return this.http
       .post<TestCase>(this.url, payload)
       .toPromise();
   }
+
   updateTestCase(testCase: TestCase): Promise<{ updated: number }> {
-    const payload = this.stripPayload(testCase);
+    const payload = TestCasesService.stripPayload(testCase);
     return this.http
       .put<{ updated: number }>(`${this.url}/${testCase.id}`, payload)
       .toPromise();
@@ -42,9 +47,5 @@ export class TestCasesService {
     return this.http
       .delete<{ deleted: number }>(`${this.url}/${id}`)
       .toPromise();
-  }
-
-  private stripPayload(testCase: TestCase): any {
-    return cloneWithoutKeys(testCase, ['id']);
   }
 }

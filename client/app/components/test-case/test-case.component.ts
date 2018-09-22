@@ -12,7 +12,7 @@ import { TestCase } from '../../models/test-case.model';
 export class TestCaseComponent implements OnInit {
   public id: number;
   public testCase: TestCase;
-  public isLoading = true;
+  public isLoading: boolean;
 
   constructor(
     private route: ActivatedRoute,
