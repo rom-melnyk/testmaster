@@ -5,6 +5,7 @@
 @import "~bootstrap/scss/bootstrap";
 //@import "~bootstrap/dist/css/bootstrap.min.css";
 
+
 // ------------- sticky footer -------------
 html {
   position: relative;
@@ -14,6 +15,7 @@ html {
 body {
   margin-bottom: 3rem + 2rem; // see `components/footer/footer.component.scss`
 }
+
 
 // ------------- forms -------------
 .required-label {
@@ -54,5 +56,14 @@ input {
   & ~ .error {
     display: none;
     color: $danger;
+  }
+}
+
+
+// ------------- table -------------
+.table.table-hover {
+  td {
+    padding-left: 0;
+    padding-right: 0;
   }
 }
