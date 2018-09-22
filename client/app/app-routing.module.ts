@@ -16,22 +16,23 @@ const routes: Routes = [
   { path: Paths.HOME, component: HomeComponent },
 
   { path: Paths.TestCases.ALL, component: TestCasesComponent },
-  { path: Paths.TestCases.NEW, component: NewTestCaseComponent },
+  { path: Paths.TestCases.EDIT, component: NewTestCaseComponent },
   { path: Paths.TestCases.ONE, component: TestCaseComponent },
 
   { path: Paths.TestSuites.ALL, component: TestSuitesComponent },
-  { path: Paths.TestSuites.NEW, component: TestSuitesComponent },
+  { path: Paths.TestSuites.EDIT, component: TestSuitesComponent },
   { path: Paths.TestSuites.ONE, component: TestSuitesComponent },
 
-  { path: Paths.TestPlans.ALL, component: TestPlansComponent },
-  { path: Paths.TestPlans.NEW, component: TestPlansComponent },
-  { path: Paths.TestPlans.ONE, component: TestPlansComponent },
+  // { path: Paths.TestPlans.ALL, component: TestPlansComponent },
+  // { path: Paths.TestPlans.NEW, component: TestPlansComponent },
+  // { path: Paths.TestPlans.ONE, component: TestPlansComponent },
 
-  { path: Paths.RegressionCycles.ALL, component: RegressionCyclesComponent },
-  { path: Paths.RegressionCycles.NEW, component: RegressionCyclesComponent },
-  { path: Paths.RegressionCycles.ONE, component: RegressionCyclesComponent },
+  // { path: Paths.RegressionCycles.ALL, component: RegressionCyclesComponent },
+  // { path: Paths.RegressionCycles.NEW, component: RegressionCyclesComponent },
+  // { path: Paths.RegressionCycles.ONE, component: RegressionCyclesComponent },
 
   { path: Paths.NOT_FOUND, component: NotFoundComponent },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
