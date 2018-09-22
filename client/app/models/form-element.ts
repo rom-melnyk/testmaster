@@ -1,5 +1,6 @@
-interface InputModel {
+export interface InputModel {
   name: string;
+  value: any;
   type: 'string' | 'text' | 'number' | 'dropdown';
   label?: string;
   defaultValue?: any;
@@ -27,4 +28,4 @@ export interface DropdownInputModel extends InputModel {
   options: Array<{ name: string; value: string | number }>;
 }
 
-export type InputModels = InputModel[];
+export type FormModel = InputModel[];

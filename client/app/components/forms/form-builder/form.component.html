@@ -1,5 +1,8 @@
 <form (ngSubmit)="_onSubmit()" [formGroup]="form">
-  <ng-container *ngFor="let inputModel of normalizedInputModels">
+  <div class="alert alert-primary text-center" *ngIf="!formModel || formModel.length === 0">
+    Loading...
+  </div>
+  <ng-container *ngFor="let inputModel of formModel">
     <div class="row form-group" [formGroup]="form">
       <label for="{{inputModel.name}}" class="col-3 col-form-label text-capitalize">
         {{inputModel.label || inputModel.name}}:

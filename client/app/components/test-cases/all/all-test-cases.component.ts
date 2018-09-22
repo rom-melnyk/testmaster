@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TestCasesService } from '../../../services/test-cases.service';
-import { TestCase } from '../../../models/test-case.model';
+import { TestCaseModel } from '../../../models/test-case.model';
 
 @Component({
   selector: 'tm-all-test-cases',
@@ -9,7 +9,7 @@ import { TestCase } from '../../../models/test-case.model';
 })
 export class AllTestCasesComponent implements OnInit {
   public isLoading: boolean;
-  public testCases: TestCase[] = [];
+  public testCases: TestCaseModel[] = [];
 
   constructor(
     private testCasesService: TestCasesService,
@@ -20,7 +20,7 @@ export class AllTestCasesComponent implements OnInit {
     this.loadTestCases();
   }
 
-  deleteTestCase(testCase: TestCase) {
+  deleteTestCase(testCase: TestCaseModel) {
     const id = +testCase.id;
     const title = testCase.title.length > 30
       ? (testCase.title.slice(0, 30) + '...')
@@ -36,7 +36,7 @@ export class AllTestCasesComponent implements OnInit {
 
   private loadTestCases() {
     return this.testCasesService.getTestCases()
-      .then((testCases: TestCase[]) => {
+      .then((testCases: TestCaseModel[]) => {
         this.testCases = testCases;
       })
       .catch((e) => {

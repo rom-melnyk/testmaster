@@ -1,12 +1,12 @@
-import { InputModels, StringInputModel, TextInputModel } from './form-element';
+import { FormModel, StringInputModel, TextInputModel } from './form-element';
 
-export interface TestCase {
+export interface TestCaseModel {
   id: number;
   title: string;
   description: string;
 }
 
-export const TestCaseForm: InputModels = [
+export const TestCaseFormModel: FormModel = [
   <StringInputModel>{
     name: 'title',
     type: 'string',

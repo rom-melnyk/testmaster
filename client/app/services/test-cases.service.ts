@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { TestCase } from '../models/test-case.model';
+import { TestCaseModel } from '../models/test-case.model';
 import { cloneWithoutKeys } from '../../../shared/utils';
 
 @Injectable({
@@ -9,7 +9,7 @@ import { cloneWithoutKeys } from '../../../shared/utils';
 export class TestCasesService {
   private url = '/api/test-cases';
 
-  private static stripPayload(testCase: TestCase): any {
+  private static stripPayload(testCase: TestCaseModel): any {
     return cloneWithoutKeys(testCase, ['id']);
   }
 
@@ -17,26 +17,26 @@ export class TestCasesService {
     private http: HttpClient
   ) { }
 
-  getTestCases(): Promise<TestCase[]> {
+  getTestCases(): Promise<TestCaseModel[]> {
     return this.http
-      .get<TestCase[]>(this.url)
+      .get<TestCaseModel[]>(this.url)
       .toPromise();
   }
 
-  getTestCase(id: number): Promise<TestCase> {
+  getTestCase(id: number): Promise<TestCaseModel> {
     return this.http
-      .get<TestCase>(`${this.url}/${id}`)
+      .get<TestCaseModel>(`${this.url}/${id}`)
       .toPromise();
   }
 
-  createTestCase(testCase: any): Promise<TestCase> {
+  createTestCase(testCase: any): Promise<TestCaseModel> {
     const payload = TestCasesService.stripPayload(testCase);
     return this.http
-      .post<TestCase>(this.url, payload)
+      .post<TestCaseModel>(this.url, payload)
       .toPromise();
   }
 
-  updateTestCase(testCase: TestCase): Promise<{ updated: number }> {
+  updateTestCase(testCase: TestCaseModel): Promise<{ updated: number }> {
     const payload = TestCasesService.stripPayload(testCase);
     return this.http
       .put<{ updated: number }>(`${this.url}/${testCase.id}`, payload)
