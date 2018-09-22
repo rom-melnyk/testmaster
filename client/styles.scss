@@ -5,6 +5,16 @@
 @import "~bootstrap/scss/bootstrap";
 //@import "~bootstrap/dist/css/bootstrap.min.css";
 
+// ------------- sticky footer -------------
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 3rem + 2rem; // see `components/footer/footer.component.scss`
+}
+
 // ------------- forms -------------
 .required-label {
   display: inline-block;

@@ -1,9 +1,9 @@
-@import "../top-level-container.styles";
-@import "../../../../shared.styles";
+@import "../shared/top-level-container.styles";
+@import "../../../shared.styles";
 
 header {
-  @extend .header-footer-stripe;
   margin-bottom: 2rem;
+  padding: 2rem 0;
 
   .container {
     @extend .top-level-container;

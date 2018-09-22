@@ -1,14 +1,9 @@
 @import "../../../shared.styles";
 
-.header-footer-stripe {
-  padding: 2rem 0;
-}
-
 .top-level-container {
-  @extend .no-padding;
-
   min-width: 30rem;
   width: 80%;
   max-width: 80rem;
   margin: 0 auto;
+  padding: 0;
 }
