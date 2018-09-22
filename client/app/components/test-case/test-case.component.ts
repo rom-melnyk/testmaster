@@ -36,4 +36,13 @@ export class TestCaseComponent implements OnInit {
       });
   }
 
+  deleteTestCase() {
+    if (confirm('Sure to delete the Test Case?')) {
+      this.testCasesService.deleteTestCase(this.id)
+        .then(() => {
+          this.location.back();
+        })
+        .catch(console.error);
+    }
+  }
 }

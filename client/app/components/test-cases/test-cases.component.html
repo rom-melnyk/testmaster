@@ -27,7 +27,7 @@
           </div>
           <div class="col-2 text-right">
             <div class="btn-group btn-group-sm controls">
-              <button class="btn btn-danger" title="Delete the Test Case">Del</button>
+              <button class="btn btn-danger" title="Delete the Test Case" (click)="deleteTestCase(testCase);">Del</button>
               <a routerLink="/test-cases/{{testCase.id}}" class="btn btn-info" title="Edit the Test Case">Edit</a>
             </div>
           </div>

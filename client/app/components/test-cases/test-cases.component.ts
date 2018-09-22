@@ -17,7 +17,25 @@ export class TestCasesComponent implements OnInit {
 
   ngOnInit() {
     this.isLoading = true;
-    this.testCasesService.getTestCases()
+    this.loadTestCases();
+  }
+
+  deleteTestCase(testCase: TestCase) {
+    const id = +testCase.id;
+    const title = testCase.title.length > 30
+      ? (testCase.title.slice(0, 30) + '...')
+      : testCase.title;
+    if (confirm(`Sure to delete the Test Case\n"${title}"?`)) {
+      this.testCasesService.deleteTestCase(id)
+        .then(() => {
+          return this.loadTestCases();
+        })
+        .catch(console.error);
+    }
+  }
+
+  private loadTestCases() {
+    return this.testCasesService.getTestCases()
       .then((testCases: TestCase[]) => {
         this.testCases = testCases;
       })
@@ -29,5 +47,4 @@ export class TestCasesComponent implements OnInit {
         this.isLoading = false;
       });
   }
-
 }
