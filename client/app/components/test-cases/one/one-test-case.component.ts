@@ -1,15 +1,15 @@
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { TestCasesService } from '../../services/test-cases.service';
-import { TestCase } from '../../models/test-case.model';
+import { TestCasesService } from '../../../services/test-cases.service';
+import { TestCase } from '../../../models/test-case.model';
 
 @Component({
   selector: 'tm-test-case',
-  templateUrl: './test-case.component.html',
-  styleUrls: [ './test-case.component.scss' ]
+  templateUrl: './one-test-case.component.html',
+  styleUrls: [ './one-test-case.component.scss' ]
 })
-export class TestCaseComponent implements OnInit {
+export class OneTestCaseComponent implements OnInit {
   public id: number;
   public testCase: TestCase;
   public isLoading: boolean;

@@ -5,9 +5,9 @@ import { Paths } from '../../shared/constants';
 
 import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { TestCasesComponent } from './components/test-cases/test-cases.component';
-import { TestCaseComponent } from './components/test-case/test-case.component';
-import { NewTestCaseComponent } from './components/new-test-case/new-test-case.component';
+import { AllTestCasesComponent } from './components/test-cases/all/all-test-cases.component';
+import { OneTestCaseComponent } from './components/test-cases/one/one-test-case.component';
+import { EditTestCaseComponent } from './components/test-cases/edit/edit-test-case.component';
 import { TestSuitesComponent } from './components/test-suites/test-suites.component';
 import { TestPlansComponent } from './components/test-plans/test-plans.component';
 import { RegressionCyclesComponent } from './components/regression-cycles/regression-cycles.component';
@@ -15,9 +15,9 @@ import { RegressionCyclesComponent } from './components/regression-cycles/regres
 const routes: Routes = [
   { path: Paths.HOME, component: HomeComponent },
 
-  { path: Paths.TestCases.ALL, component: TestCasesComponent },
-  { path: Paths.TestCases.EDIT, component: NewTestCaseComponent },
-  { path: Paths.TestCases.ONE, component: TestCaseComponent },
+  { path: Paths.TestCases.ALL, component: AllTestCasesComponent },
+  { path: Paths.TestCases.EDIT, component: EditTestCaseComponent },
+  { path: Paths.TestCases.ONE, component: OneTestCaseComponent },
 
   { path: Paths.TestSuites.ALL, component: TestSuitesComponent },
   { path: Paths.TestSuites.EDIT, component: TestSuitesComponent },

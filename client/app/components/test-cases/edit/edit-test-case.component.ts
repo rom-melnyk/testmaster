@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { TestCaseForm } from '../../models/test-case.model';
-import { TestCasesService } from '../../services/test-cases.service';
+import { TestCaseForm } from '../../../models/test-case.model';
+import { TestCasesService } from '../../../services/test-cases.service';
 
 @Component({
   selector: 'tm-new-test-case',
@@ -11,9 +11,9 @@ import { TestCasesService } from '../../services/test-cases.service';
       <tm-form [inputModels]="testCaseForm" [onSubmit]="onSubmit" (submitted)="onSubmitted($event)"></tm-form>
     </div>
   `,
-  styleUrls: [ './new-test-case.component.scss' ]
+  styleUrls: [ './edit-test-case.component.scss' ]
 })
-export class NewTestCaseComponent implements OnInit {
+export class EditTestCaseComponent implements OnInit {
   public readonly testCaseForm = TestCaseForm;
   public onSubmit: (data: any) => Promise<any>;
 

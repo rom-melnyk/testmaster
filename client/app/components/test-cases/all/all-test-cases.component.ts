@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { TestCasesService } from '../../services/test-cases.service';
-import { TestCase } from '../../models/test-case.model';
+import { TestCasesService } from '../../../services/test-cases.service';
+import { TestCase } from '../../../models/test-case.model';
 
 @Component({
-  selector: 'tm-test-cases',
-  templateUrl: './test-cases.component.html',
-  styleUrls: [ './test-cases.component.scss' ]
+  selector: 'tm-all-test-cases',
+  templateUrl: './all-test-cases.component.html',
+  styleUrls: [ './all-test-cases.component.scss' ]
 })
-export class TestCasesComponent implements OnInit {
+export class AllTestCasesComponent implements OnInit {
   public isLoading: boolean;
   public testCases: TestCase[] = [];
 
