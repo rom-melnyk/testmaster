@@ -8,9 +8,16 @@
   @extend .top-level-container;
 }
 
-.description {
-  //white-space: nowrap;
-  max-height: 2em;
+.title, .description {
   overflow: hidden;
   text-overflow: ellipsis;
+  max-height: 2 * 1.5em; // = 2 * line-height
+}
+
+.description {
+  display: block;
+}
+
+.badge {
+  margin-right: .5rem;
 }

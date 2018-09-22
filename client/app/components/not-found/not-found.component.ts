@@ -9,8 +9,8 @@ import { Component, OnInit } from '@angular/core';
         <h1>404</h1>
         <h2>Not found</h2>
         <div class="btn-group">
+          <button class="btn btn-secondary" (click)="onBackClick();">&larr; Back</button>
           <a class="btn btn-secondary" routerLink="/">To main page</a>
-          <a class="btn btn-secondary" href="javascript://" (click)="onBackClick();">&larr; Back</a>
         </div>
       </div>
       <div class="col-6">

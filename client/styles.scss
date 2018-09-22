@@ -67,3 +67,15 @@ input {
     padding-right: 0;
   }
 }
+
+
+// ------------- hover control -------------
+.hover-controls {
+  .controls {
+    opacity: .05;
+  }
+
+  &:hover .controls {
+    opacity: 1;
+  }
+}
