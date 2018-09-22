@@ -8,9 +8,9 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AllTestCasesComponent } from './components/test-cases/all/all-test-cases.component';
 import { OneTestCaseComponent } from './components/test-cases/one/one-test-case.component';
 import { EditTestCaseComponent } from './components/test-cases/edit/edit-test-case.component';
-import { TestSuitesComponent } from './components/test-suites/test-suites.component';
-import { TestPlansComponent } from './components/test-plans/test-plans.component';
-import { RegressionCyclesComponent } from './components/regression-cycles/regression-cycles.component';
+import { AllTestSuitesComponent } from './components/test-suites/all/all-test-suites.component';
+import { AllTestPlansComponent } from './components/test-plans/all/all-test-plans.component';
+import { AllRegressionCyclesComponent } from './components/regression-cycles/all/all-regression-cycles.component';
 
 const routes: Routes = [
   { path: Paths.HOME, component: HomeComponent },
@@ -19,17 +19,17 @@ const routes: Routes = [
   { path: Paths.TestCases.EDIT, component: EditTestCaseComponent },
   { path: Paths.TestCases.ONE, component: OneTestCaseComponent },
 
-  { path: Paths.TestSuites.ALL, component: TestSuitesComponent },
-  { path: Paths.TestSuites.EDIT, component: TestSuitesComponent },
-  { path: Paths.TestSuites.ONE, component: TestSuitesComponent },
+  { path: Paths.TestSuites.ALL, component: AllTestSuitesComponent },
+  { path: Paths.TestSuites.EDIT, component: AllTestSuitesComponent },
+  { path: Paths.TestSuites.ONE, component: AllTestSuitesComponent },
 
-  // { path: Paths.TestPlans.ALL, component: TestPlansComponent },
-  // { path: Paths.TestPlans.NEW, component: TestPlansComponent },
-  // { path: Paths.TestPlans.ONE, component: TestPlansComponent },
+  // { path: Paths.TestPlans.ALL, component: AllTestPlansComponent },
+  // { path: Paths.TestPlans.NEW, component: AllTestPlansComponent },
+  // { path: Paths.TestPlans.ONE, component: AllTestPlansComponent },
 
-  // { path: Paths.RegressionCycles.ALL, component: RegressionCyclesComponent },
-  // { path: Paths.RegressionCycles.NEW, component: RegressionCyclesComponent },
-  // { path: Paths.RegressionCycles.ONE, component: RegressionCyclesComponent },
+  // { path: Paths.RegressionCycles.ALL, component: AllRegressionCyclesComponent },
+  // { path: Paths.RegressionCycles.NEW, component: AllRegressionCyclesComponent },
+  // { path: Paths.RegressionCycles.ONE, component: AllRegressionCyclesComponent },
 
   { path: Paths.NOT_FOUND, component: NotFoundComponent },
   { path: '**', component: NotFoundComponent },

@@ -7,9 +7,9 @@ import { Component, OnInit } from '@angular/core';
       <h1>Regression Cycles</h1>
     </div>
   `,
-  styleUrls: [ './regression-cycles.component.scss' ]
+  styleUrls: [ './all-regression-cycles.component.scss' ]
 })
-export class RegressionCyclesComponent implements OnInit {
+export class AllRegressionCyclesComponent implements OnInit {
 
   constructor() { }
 

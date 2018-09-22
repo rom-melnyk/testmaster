@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'tm-test-suites',
+  selector: 'tm-test-plans',
   template: `
     <div class="container">
-      <h1>Test Suites</h1>
+      <h1>Test Plans</h1>
     </div>
   `,
-  styleUrls: [ './test-suites.component.scss' ]
+  styleUrls: [ './all-test-plans.component.scss' ]
 })
-export class TestSuitesComponent implements OnInit {
+export class AllTestPlansComponent implements OnInit {
 
   constructor() { }
 

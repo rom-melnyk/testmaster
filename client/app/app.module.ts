@@ -13,9 +13,9 @@ import { FooterComponent } from './components/footer/footer.component';
 
 import { AllTestCasesComponent } from './components/test-cases/all/all-test-cases.component';
 import { HomeComponent } from './components/home/home.component';
-import { TestSuitesComponent } from './components/test-suites/test-suites.component';
-import { TestPlansComponent } from './components/test-plans/test-plans.component';
-import { RegressionCyclesComponent } from './components/regression-cycles/regression-cycles.component';
+import { AllTestSuitesComponent } from './components/test-suites/all/all-test-suites.component';
+import { AllTestPlansComponent } from './components/test-plans/all/all-test-plans.component';
+import { AllRegressionCyclesComponent } from './components/regression-cycles/all/all-regression-cycles.component';
 import { OneTestCaseComponent } from './components/test-cases/one/one-test-case.component';
 import { EditTestCaseComponent } from './components/test-cases/edit/edit-test-case.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
@@ -31,9 +31,9 @@ import { FormComponent } from './components/forms/form-builder/form.component';
     AllTestCasesComponent,
     HomeComponent,
     NotFoundComponent,
-    TestSuitesComponent,
-    TestPlansComponent,
-    RegressionCyclesComponent,
+    AllTestSuitesComponent,
+    AllTestPlansComponent,
+    AllRegressionCyclesComponent,
     OneTestCaseComponent,
     EditTestCaseComponent,
 
