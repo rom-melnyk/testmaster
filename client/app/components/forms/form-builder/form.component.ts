@@ -1,23 +1,30 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Location } from '@angular/common';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { InputModels } from '../../../models/form-element';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'tm-form',
   templateUrl: './form.component.html',
   styles: [
     `:host { display: block; }`,
-    `form { display: block; }`
+    `form { display: block; }`,
+    `.submission-error-message { margin: 0 1rem 0 0; }`
   ]
 })
 export class FormComponent implements OnInit {
   public normalizedInputModels: InputModels;
   public form: FormGroup;
-  @Input() private inputModels: InputModels;
-  @Input() onSubmit: (any) => Observable<any>;
+  public isSubmitting = false;
+  public submissionError = false;
 
-  constructor() { }
+  @Input() private inputModels: InputModels;
+  @Input() onSubmit: (any) => Promise<any>;
+  @Output() submitted = new EventEmitter<boolean>();
+
+  constructor(
+    private location: Location,
+  ) { }
 
   ngOnInit() {
     this.normalizedInputModels = this.inputModels.map((inputModel) => {
@@ -42,8 +49,28 @@ export class FormComponent implements OnInit {
   }
 
   _onSubmit() {
-    if (this.onSubmit) {
-      this.onSubmit(this.form.value);
+    if (!this.onSubmit) {
+      return;
+    }
+
+    this.isSubmitting = true;
+    this.onSubmit(this.form.value)
+      .then((result: any) => {
+        this.isSubmitting = false;
+        this.submissionError = false;
+        this.submitted.emit(true);
+      })
+      .catch((e: any) => {
+        console.error(e);
+        this.isSubmitting = false;
+        this.submissionError = true;
+        this.submitted.emit(false);
+      });
+  }
+
+  goBack() {
+    if (!this.form.dirty || confirm('Sure to ditch unsaved data?')) {
+      this.location.back();
     }
   }
 }

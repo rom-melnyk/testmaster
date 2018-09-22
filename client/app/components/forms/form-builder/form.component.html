@@ -20,9 +20,14 @@
     </div>
   </ng-container>
   <div class="row form-group no-gutters justify-content-end">
+    <div class="alert alert-danger submission-error-message" *ngIf="submissionError">
+      An error occurred during saving :-(
+    </div>
     <div class="btn-group">
-      <a href="javascript:history.back();" class="btn btn-secondary">&larr;</a>
-      <button class="btn btn-success" type="submit" [disabled]="!form.valid">Save</button>
+      <button class="btn btn-secondary" type="button" [disabled]="isSubmitting" (click)="goBack()">&larr;</button>
+      <button class="btn btn-success" type="submit" [disabled]="!form.valid || isSubmitting">
+        {{isSubmitting ? '&hellip;' : 'Save'}}
+      </button>
     </div>
   </div>
 </form>
