@@ -10,9 +10,7 @@ interface Attachment {
 @Component({
   selector: 'tm-attachments',
   templateUrl: './attachments.component.html',
-  styles: [
-    '.name { display: block; }',
-  ]
+  styleUrls: [ './attachments.component.scss', ]
 })
 export class AttachmentsComponent implements OnInit {
   @Input() private testCaseId: number;

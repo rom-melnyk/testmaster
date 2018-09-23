@@ -1,0 +1,14 @@
+.card {
+  margin-bottom: 2rem;
+}
+
+.name, .date {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.name {
+  margin-bottom: 1rem;
+}
