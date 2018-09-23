@@ -9,6 +9,7 @@ const { app: { port: appPort } } = require('./config.json');
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as cookieParser from 'cookie-parser';
+import * as fileUpload from 'express-fileupload';
 
 import { resSendError, getAvailablePaths, sendIndexHtml, } from './api/middleware';
 import { singleAttachmentRouter } from './api/single-attachment';
@@ -21,6 +22,9 @@ const app = express();
 
 app.use(cookieParser());
 app.use(bodyParser.json());
+app.use(fileUpload({
+  limits: { fileSize: 50 * 1024 * 1024 }
+}));
 app.use(resSendError());
 
 const staticPath = path.join(__dirname, '../client-compiled');

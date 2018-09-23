@@ -41,6 +41,7 @@
     "cookie-parser": "^1.4.3",
     "core-js": "^2.5.4",
     "express": "^4.16.3",
+    "express-fileupload": "^1.0.0-alpha.1",
     "md5": "^2.2.1",
     "mysql": "^2.16.0",
     "mysql2": "^1.6.1",

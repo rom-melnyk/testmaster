@@ -7,9 +7,6 @@ const { app: { attachmentsDir } } = require('../config.json');
 
 const readdir = promisify(fs.readdir);
 const stat = promisify(fs.stat);
-const mkdir = promisify(fs.mkdir);
-const chmod = promisify(fs.chmod);
-const rmdir = promisify(fs.rmdir);
 
 /**
  * @api-base /api/test-cases/:id/attachments
@@ -55,8 +52,32 @@ testCaseAttachmentsRouter.get('/', (req: express.Request, res: express.Response)
 });
 
 testCaseAttachmentsRouter.post('/', (req: express.Request, res: express.Response) => {
-  const testCaseId = req.testCaseId;
-  // TODO
+  // The name of the input field (i.e. "file") is used to retrieve the uploaded file
+  const fileObj = req.files && req.files[ Object.keys(req.files)[0] ];
+  if (!fileObj) {
+    return res.sendError({ status: 400 }, 'No file was uploaded');
+  }
+
+  const filename = getSafeName(req.testCaseId, fileObj.name);
+  fileObj.mv(path.join(attachmentsDir, filename))
+    .then((err) => {
+      if (err) {
+        return Promise.reject(err);
+      }
+      res.send({ uploaded: filename });
+    })
+    .catch((err) => {
+      res.sendError(err, `Failed to upload "${fileObj.name}"`);
+    });
 });
+
+const UNSAFE_SYMBOLS = /['"`:# \(\)\/\\\?]/g;
+
+function getSafeName(testCaseId: string | number, originalName: string): string {
+  const { name, ext } = path.parse(originalName);
+  return `${testCaseId}_`
+    + name.replace(UNSAFE_SYMBOLS, '_')
+    + `_${Date.now()}` + ext;
+}
 
 export { testCaseAttachmentsRouter };
