@@ -1,6 +1,5 @@
 import * as express from 'express';
 import { TestCase } from '../db/models/test-case.model';
-import { sendError } from './api-helpers';
 
 /**
  * @api-base /api/test-cases
@@ -11,7 +10,7 @@ testCasesRouter.get('/', (req, res) => {
   TestCase.findAll().then((testCases) => {
     res.send(testCases);
   }).catch((e) => {
-    sendError(res, 'DB error', e);
+    res.sendError(e, 'DB error');
   });
 });
 
@@ -20,10 +19,10 @@ testCasesRouter.get('/:id', (req, res) => {
     if (testCase) {
       res.send(testCase);
     } else {
-      return sendError(res, 'Not found');
+      return res.sendError({ status: 404 }, 'Not found');
     }
   }).catch((e) => {
-    sendError(res, 'DB error', e);
+    res.sendError(e, 'DB error');
   });
 });
 
@@ -31,7 +30,7 @@ testCasesRouter.post('/', (req, res) => {
   TestCase.create(req.body).then((result) => {
     res.send(result.toJSON());
   }).catch((e) => {
-    sendError(res, 'DB error', e);
+    res.sendError(e, 'DB error');
   });
 });
 
@@ -40,7 +39,7 @@ testCasesRouter.put('/:id', (req, res) => {
     .then(([ updated ]) => {
       res.send({ updated });
     }).catch((e) => {
-      sendError(res, 'DB error', e);
+      res.sendError(e, 'DB error');
     });
 });
 
@@ -49,7 +48,7 @@ testCasesRouter.delete('/:id', (req, res) => {
     .then((deleted) => {
       res.send({ deleted });
     }).catch((e) => {
-      sendError(res, 'DB error', e);
+      res.sendError(e, 'DB error');
     });
 });
 

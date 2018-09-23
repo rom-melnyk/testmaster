@@ -1,51 +1,39 @@
 import * as http from 'http';
 import * as path from 'path';
 
+import { sequelize } from './db';
+
+import { Paths } from '../shared/constants';
+const { app: { port: appPort } } = require('./config.json');
+
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as cookieParser from 'cookie-parser';
 
-const { app: APP_CONFIG } = require('./config.json');
-import { Paths } from '../shared/constants';
-
+import { resSendError, getAttachment, getAvailablePaths, sendIndexHtml, } from './api/middleware';
 import { testCasesRouter } from './api/test-cases';
 // import { testSuitesRouter } from './api/test-suites';
 // import { testPlansRouter } from './api/test-plans';
 // import { regressionCyclesRouter } from './api/regression-cycles';
 
-import { sequelize } from './db';
-
 const app = express();
 
 app.use(cookieParser());
 app.use(bodyParser.json());
+app.use(resSendError());
 
 const staticPath = path.resolve(__dirname, '../client-compiled');
-const staticConfig = express.static(staticPath);
-app.use(staticConfig);
+app.use(express.static(staticPath));
 
-const availablePaths = Object.values(Paths)
-  .reduce((paths, _path) => {
-    const newPaths = typeof _path === 'string'
-      ? [_path]
-      : Object.values(_path);
-    return paths.concat(newPaths);
-  }, [])
-  .map(_path => `/${_path}`);
+app.get('/attachments/:filename', getAttachment());
 
 app.use(`/api/${Paths.TestCases.ALL}`, testCasesRouter);
 // app.use(`/api/${Paths.TestSuites.ALL}`, testSuitesRouter);
 // app.use(`/api/${Paths.TestPlans.ALL}`, testPlansRouter);
 // app.use(`/api/${Paths.RegressionCycles.ALL}`, regressionCyclesRouter);
 
-app.get(availablePaths, (req, res) => {
-  res.sendFile('index.html', { root: staticPath }, (err) => {
-    if (err) {
-      console.error(err);
-    }
-    res.end();
-  });
-});
+const availablePaths = getAvailablePaths();
+app.get(availablePaths, sendIndexHtml(staticPath));
 
 app.all(/.*/, (req, res) => {
   res.redirect(`/${Paths.NOT_FOUND}`);
@@ -62,4 +50,4 @@ sequelize
     console.error('[db] Unable to connect:', e);
   });
 
-http.createServer(app).listen(APP_CONFIG.port, () => console.log(logMsg + APP_CONFIG.port));
+http.createServer(app).listen(appPort, () => console.log(logMsg + appPort));
