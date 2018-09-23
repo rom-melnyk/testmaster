@@ -1,14 +1,11 @@
 import * as http from 'http';
-import * as https from 'https';
 import * as path from 'path';
-
-import * as forceSsl from 'express-force-ssl';
 
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as cookieParser from 'cookie-parser';
 
-import httpsOptions from './https-cert/index';
+import { app as APP_CONFIG } from './config.json';
 import { Paths } from '../shared/constants';
 
 import { testCasesRouter } from './api/test-cases';
@@ -20,7 +17,6 @@ import { sequelize } from './db';
 
 const app = express();
 
-app.use(forceSsl);
 app.use(cookieParser());
 app.use(bodyParser.json());
 
@@ -29,13 +25,13 @@ const staticConfig = express.static(staticPath);
 app.use(staticConfig);
 
 const availablePaths = Object.values(Paths)
-  .reduce((paths, path) => {
-    const newPaths = typeof path === 'string'
-      ? [path]
-      : Object.values(path);
+  .reduce((paths, _path) => {
+    const newPaths = typeof _path === 'string'
+      ? [_path]
+      : Object.values(_path);
     return paths.concat(newPaths);
   }, [])
-  .map(path => `/${path}`);
+  .map(_path => `/${_path}`);
 
 app.use(`/api/${Paths.TestCases.ALL}`, testCasesRouter);
 // app.use(`/api/${Paths.TestSuites.ALL}`, testSuitesRouter);
@@ -55,7 +51,7 @@ app.all(/.*/, (req, res) => {
   res.redirect(`/${Paths.NOT_FOUND}`);
 });
 
-const logMsg = '[http/s] TestMaster server listening on ';
+const logMsg = '[http] TestMaster server listening on ';
 
 sequelize
   .authenticate()
@@ -63,8 +59,7 @@ sequelize
     console.log('[db] Connection has been established successfully.');
   })
   .catch((e) => {
-    console.error('Unable to connect to the database:', e);
+    console.error('[db] Unable to connect:', e);
   });
 
-http.createServer(app).listen(80, () => console.log(logMsg + 80));
-https.createServer(httpsOptions, app).listen(443, () => console.log(logMsg + 443));
+http.createServer(app).listen(APP_CONFIG.port, () => console.log(logMsg + APP_CONFIG.port));

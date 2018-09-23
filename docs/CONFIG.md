@@ -13,6 +13,9 @@ Create it manually before starting the server.
     "port": ...,
     "dialect": "mysql"
   },
-  attachmentsDir: "/tmp/attachments"
+  "app": {
+    "port": 9000,
+    "attachmentsDir": "/tmp/attachments"
+  }
 }
 ```
