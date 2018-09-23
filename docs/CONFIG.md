@@ -1,4 +1,4 @@
-# `server/creds.json` structure
+# `server/config.json` structure
 
 The file contains sensitive info so it's not under version control.  
 Create it manually before starting the server.
@@ -12,6 +12,7 @@ Create it manually before starting the server.
     "password": "...",
     "port": ...,
     "dialect": "mysql"
-  }
+  },
+  attachmentsDir: "/tmp/attachments"
 }
 ```

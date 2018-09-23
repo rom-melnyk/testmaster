@@ -7,7 +7,7 @@ TestMaster helps managing tests.
 # Architecture
 
 - [DB structure](./docs/DB_STRUCTURE.md)
-- [creds.json](./docs/CREDS.md)
+- [config.json](docs/CONFIG.md)
 
 ## Server architecture
 

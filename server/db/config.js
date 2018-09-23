@@ -1,4 +1,4 @@
-const { database } = require('../creds');
+const { database } = require('../config');
 
 const dbConfig = Object.assign({}, database, {
   // we unify migration and seeders in honor ha have only migrations

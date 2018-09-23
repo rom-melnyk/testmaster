@@ -7,7 +7,7 @@ npm-debug.log
 
 NODE_PATH
 
-server/creds.json
+server/config.json
 
 client-compiled/
 out-tsc/
