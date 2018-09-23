@@ -45,4 +45,8 @@ export class OneTestCaseComponent implements OnInit {
         .catch(console.error);
     }
   }
+
+  goBack() {
+    this.location.back();
+  }
 }
