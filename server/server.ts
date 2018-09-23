@@ -5,7 +5,7 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as cookieParser from 'cookie-parser';
 
-import { app as APP_CONFIG } from './config.json';
+const { app: APP_CONFIG } = require('./config.json');
 import { Paths } from '../shared/constants';
 
 import { testCasesRouter } from './api/test-cases';
@@ -51,7 +51,7 @@ app.all(/.*/, (req, res) => {
   res.redirect(`/${Paths.NOT_FOUND}`);
 });
 
-const logMsg = '[http] TestMaster server listening on ';
+const logMsg = '[http] TestMaster server listening on :';
 
 sequelize
   .authenticate()

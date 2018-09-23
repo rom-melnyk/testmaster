@@ -1,5 +1,5 @@
 import Sequelize from 'sequelize';
-const { database } = require('../creds');
+const { database } = require('../config.json');
 
 export const sequelize = new Sequelize(database.database, database.username, database.password, {
   host: database.host,
