@@ -21,6 +21,7 @@ import { EditTestCaseComponent } from './components/test-cases/edit/edit-test-ca
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
 import { FormComponent } from './components/forms/form-builder/form.component';
+import { AttachmentsComponent } from './components/attachments/attachments.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { FormComponent } from './components/forms/form-builder/form.component';
     EditTestCaseComponent,
 
     FormComponent,
+    AttachmentsComponent,
   ],
   imports: [
     // NgbModule,
