@@ -10,7 +10,8 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as cookieParser from 'cookie-parser';
 
-import { resSendError, getAttachment, getAvailablePaths, sendIndexHtml, } from './api/middleware';
+import { resSendError, getAvailablePaths, sendIndexHtml, } from './api/middleware';
+import { singleAttachmentRouter } from './api/single-attachment';
 import { testCasesRouter } from './api/test-cases';
 // import { testSuitesRouter } from './api/test-suites';
 // import { testPlansRouter } from './api/test-plans';
@@ -22,10 +23,10 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(resSendError());
 
-const staticPath = path.resolve(__dirname, '../client-compiled');
+const staticPath = path.join(__dirname, '../client-compiled');
 app.use(express.static(staticPath));
 
-app.get('/attachments/:filename', getAttachment());
+app.use(`/attachments`, singleAttachmentRouter);
 
 app.use(`/api/${Paths.TestCases.ALL}`, testCasesRouter);
 // app.use(`/api/${Paths.TestSuites.ALL}`, testSuitesRouter);

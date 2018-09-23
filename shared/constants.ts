@@ -25,5 +25,5 @@ export const Paths = {
   //   ONE: 'regression-cycles/:id',
   // },
 
-  'NOT_FOUND': '404',
+  NOT_FOUND: '404',
 };
