@@ -1,0 +1,25 @@
+<div class="card hover-controls">
+  <a href="/attachments/{{attachment.name}}" target="_blank">
+    <img class="card-img-top" src="/attachments/{{attachment.name}}" *ngIf="attachment.type === 'image'"/>
+    <img class="card-img-top" src="/assets/attachment.png" *ngIf="attachment.type === 'other'"/>
+  </a>
+
+  <div class="card-body">
+    <small class="name" title="attachment.name">{{attachment.name}}</small>
+    <input type="text" class="hidden-name-input" tabindex="-1" disabled [value]="attachment.name"/>
+  </div>
+
+  <div class="card-footer text-muted">
+    <div class="row no-gutters align-items-center">
+      <div class="col-8">
+        <small class="date">{{attachment.date}}</small>
+      </div>
+      <div class="col-4 text-right">
+        <div class="btn-group btn-group-sm controls">
+          <button class="btn btn-danger" title="Delete the Attachment" (click)="deleteAttachment();">&times;</button>
+          <button class="btn btn-info" title="Copy the URL" (click)="setCopyMode(true);">&lt;/&gt;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

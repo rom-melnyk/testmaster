@@ -22,6 +22,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 
 import { FormComponent } from './components/forms/form-builder/form.component';
 import { AttachmentsComponent } from './components/attachments/attachments.component';
+import { AttachmentCardComponent } from './components/attachments/attachment-card/attachment-card.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { AttachmentsComponent } from './components/attachments/attachments.compo
 
     FormComponent,
     AttachmentsComponent,
+    AttachmentCardComponent,
   ],
   imports: [
     // NgbModule,

@@ -1,26 +1,5 @@
 <div class="row">
   <div class="col-3 col-md-4 col-sm-6" *ngFor="let attachment of attachments">
-    <div class="card hover-controls">
-      <img class="card-img-top" src="/attachments/{{attachment.name}}" *ngIf="attachment.type === 'image'"/>
-      <img class="card-img-top" src="/assets/attachment.png" *ngIf="attachment.type === 'other'"/>
-
-      <div class="card-body">
-        <small class="name">
-          <a href="/attachments/{{attachment.name}}" target="_blank">{{attachment.name}}</a>
-        </small>
-        <div class="row no-gutters align-items-center">
-          <div class="col-8">
-            <small class="date">{{attachment.date}}</small>
-          </div>
-          <div class="col-4 text-right">
-            <div class="btn-group btn-group-sm controls">
-              <button class="btn btn-danger" title="Delete the Attachment" (click)="deleteAttachment(attachment);">&times;</button>
-              <button class="btn btn-info" title="Copy the path for inserting" (click)="copyAttachmentPath(attachment);">&lt;/&gt;</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
+    <tm-attachment-card [attachment]="attachment" (deleted)="loadAttachments();"></tm-attachment-card>
   </div>
 </div>

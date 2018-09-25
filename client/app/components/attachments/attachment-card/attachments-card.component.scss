@@ -1,0 +1,22 @@
+.card {
+  margin-bottom: 2rem;
+}
+
+.name, .date {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-body {
+
+}
+input.hidden-name-input {
+  display: block;
+  font-size: 1px;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
