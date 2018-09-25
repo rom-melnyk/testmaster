@@ -16,7 +16,7 @@ export function resSendError() {
         }
       }
 
-      console.log(`[http] ${req.method} ${req.originalUrl}`, debug);
+      console.log(`[http] ${req.method} ${req.originalUrl}`, message && `"${message}"` || '', debug);
       res.status(statusCode).send({
         error: true,
         debug,
