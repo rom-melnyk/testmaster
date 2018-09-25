@@ -10,7 +10,7 @@ export class AttachmentsService {
     return `/api/test-cases/${testCaseId}/attachments`;
   }
   private static get IMAGE_TYPES() {
-    return [ '.jpg', '.jpeg', '.gif', '.png', '.bmp' ];
+    return [ '.jpg', '.jpeg', '.gif', '.png', '.bmp', '.svg' ];
   }
 
   static copyAttachmentPath(inputEl: HTMLInputElement, value: string): void {
@@ -40,10 +40,12 @@ export class AttachmentsService {
       });
   }
 
-  uploadAttachmentsForTestCase(testCaseId: number, file: File): Promise<Array<any>> {
+  uploadAttachmentsForTestCase(testCaseId: number, files: FileList): Promise<Array<any>> {
     const url = AttachmentsService.getUrl(testCaseId);
     const body = new FormData();
-    body.append('file', file, file.name);
+    Array.prototype.forEach.call(files, (file, i) => {
+      body.append(i, file, file.name);
+    });
     return this.http.post(url, body).toPromise() as Promise<Array<any>>;
   }
 

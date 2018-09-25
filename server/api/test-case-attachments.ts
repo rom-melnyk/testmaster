@@ -51,24 +51,41 @@ testCaseAttachmentsRouter.get('/', (req: express.Request, res: express.Response)
     });
 });
 
+interface UploadResult {
+  uploaded?: string;
+  failed?: string;
+}
+
 testCaseAttachmentsRouter.post('/', (req: express.Request, res: express.Response) => {
-  // The name of the input field (i.e. "file") is used to retrieve the uploaded file
-  const fileObj = req.files && req.files[ Object.keys(req.files)[0] ];
-  if (!fileObj) {
+  if (!req.files) {
     return res.sendError({ status: 400 }, 'No file was uploaded');
   }
 
-  const filename = getSafeName(req.testCaseId, fileObj.name);
-  fileObj.mv(path.join(attachmentsDir, filename))
-    .then((err) => {
-      if (err) {
-        return Promise.reject(err);
-      }
-      res.send({ uploaded: filename });
-    })
-    .catch((err) => {
-      res.sendError(err, `Failed to upload "${fileObj.name}"`);
+  const promises = Object.values(req.files)
+    .map((fileObj: any): Promise<UploadResult> => {
+      const filename = getSafeName(req.testCaseId, fileObj.name);
+      return fileObj.mv(path.join(attachmentsDir, filename))
+        .then((err) => {
+          return err ? Promise.reject(err) : { uploaded: filename };
+        })
+        .catch((err) => {
+          console.log(`[api/attachments] Failed uploading "${fileObj.name}"`, err);
+          return { failed: filename };
+        });
     });
+
+    Promise.all(promises)
+      .then((results: UploadResult[] ) => {
+        const combinedResults = results.reduce((accum: { failed: string[], uploaded: string[] }, resultObj: UploadResult) => {
+          const key = Object.keys(resultObj)[0] as keyof UploadResult;
+          accum[key].push(resultObj[key]);
+          return accum;
+        }, { failed: [], uploaded: [] });
+        res.send(combinedResults);
+      })
+      .catch((err) => {
+        res.sendError(err, `Failed to upload files`);
+      });
 });
 
 const UNSAFE_SYMBOLS = /['"`:# \(\)\/\\\?]/g;

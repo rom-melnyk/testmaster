@@ -10,6 +10,7 @@ import { AttachmentModel } from '../../models/attachment.model';
 export class AttachmentsComponent implements OnInit {
   @Input() private testCaseId: number;
   public attachments: AttachmentModel[] = [];
+  public uploadFieldLabel: string;
 
   constructor(
     private attachmentsService: AttachmentsService,
@@ -27,14 +28,16 @@ export class AttachmentsComponent implements OnInit {
       .catch(console.error);
   }
 
-  logFileInfo(file: File) {
-    console.log(file);
+  updateUploadLabel(files: FileList | undefined[]) {
+    this.uploadFieldLabel = Array.prototype.map.call(files, ({ name }) => name).join('; ');
   }
 
-  uploadFile(file: File) {
-    this.attachmentsService.uploadAttachmentsForTestCase(this.testCaseId, file)
+  uploadFile(fileInput: HTMLInputElement) {
+    this.attachmentsService.uploadAttachmentsForTestCase(this.testCaseId, fileInput.files)
       .then(() => {
         this.loadAttachments();
+        fileInput.value = null;
+        this.updateUploadLabel([]);
       })
       .catch(console.error);
   }
