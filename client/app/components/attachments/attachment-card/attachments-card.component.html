@@ -1,8 +1,5 @@
 <div class="card hover-controls">
-  <a href="/attachments/{{attachment.name}}" target="_blank">
-    <img class="card-img-top" src="/attachments/{{attachment.name}}" *ngIf="attachment.type === 'image'"/>
-    <img class="card-img-top" src="/assets/gfx/attachment.svg" *ngIf="attachment.type === 'other'"/>
-  </a>
+  <a href="/attachments/{{attachment.name}}" target="_blank" class="card-img-top" [style.background-image]="attachment.imageUrl"></a>
 
   <div class="card-body">
     <small class="name" title="{{attachment.name}}">{{attachment.name}}</small>

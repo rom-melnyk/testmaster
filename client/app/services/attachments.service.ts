@@ -35,7 +35,9 @@ export class AttachmentsService {
           const type: AttachmentModel['type'] = AttachmentsService.IMAGE_TYPES.includes(ext)
             ? 'image' : 'other';
           date = date.slice(0, -8).replace('T', ' ');
-          return {name, type, date};
+          let imageUrl = type === 'image' ? ('/attachments/' + name) : '/assets/gfx/attachment.svg';
+          imageUrl = `url("${imageUrl}")`; // CSS format
+          return { name, type, imageUrl, date };
         });
       });
   }
