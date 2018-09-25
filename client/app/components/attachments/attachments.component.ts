@@ -26,4 +26,16 @@ export class AttachmentsComponent implements OnInit {
       })
       .catch(console.error);
   }
+
+  logFileInfo(file: File) {
+    console.log(file);
+  }
+
+  uploadFile(file: File) {
+    this.attachmentsService.uploadAttachmentsForTestCase(this.testCaseId, file)
+      .then(() => {
+        this.loadAttachments();
+      })
+      .catch(console.error);
+  }
 }

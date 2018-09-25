@@ -42,7 +42,9 @@ export class AttachmentsService {
 
   uploadAttachmentsForTestCase(testCaseId: number, file: File): Promise<Array<any>> {
     const url = AttachmentsService.getUrl(testCaseId);
-    return this.http.post(url, file).toPromise() as Promise<Array<any>>;
+    const body = new FormData();
+    body.append('file', file, file.name);
+    return this.http.post(url, body).toPromise() as Promise<Array<any>>;
   }
 
   deleteAttachment(filename: string): Promise<any> {

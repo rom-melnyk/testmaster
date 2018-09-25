@@ -3,3 +3,19 @@
     <tm-attachment-card [attachment]="attachment" (deleted)="loadAttachments();"></tm-attachment-card>
   </div>
 </div>
+
+<div class="input-group btn-group upload">
+  <div class="custom-file">
+    <input type="file" id="attachment-upload" class="custom-file-input" #fileInput (change)="logFileInfo(fileInput.files[0])"/>
+    <label for="attachment-upload" class="custom-file-label">
+      {{ fileInput.files.length === 0 ? 'Pick a file&hellip;' : fileInput.files[0].name }}
+    </label>
+  </div>
+  <button
+    type="button"
+    class="btn
+    btn-success"
+    [disabled]="fileInput.files.length === 0"
+    (click)="uploadFile(fileInput.files[0]);"
+  >&uarr;</button>
+</div>
