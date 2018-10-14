@@ -12,11 +12,12 @@
         <input class="form-control" type="text" id="{{inputModel.name}}" *ngSwitchCase="'string'" [formControlName]="inputModel.name" />
         <ng-container *ngSwitchCase="'text'">
           <tm-tabs>
-            <div tm-tab name="Edit">text text</div>
+            <textarea
+              class="form-control" type="text" id="{{inputModel.name}}"
+              tm-tab name="Edit" [formControlName]="inputModel.name"
+            ></textarea>
             <div tm-tab name="Preview">preview preview</div>
           </tm-tabs>
-          <textarea class="form-control" type="text" id="{{inputModel.name}}"  [formControlName]="inputModel.name">
-          </textarea>
         </ng-container>
         <div class="alert alert-danger" *ngSwitchDefault>
           Unknown input type: "{{inputModel.type}}".

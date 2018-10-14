@@ -2,11 +2,11 @@ import {
   Directive,
   Component,
   OnInit,
+  AfterViewInit,
   Input,
   ContentChildren,
   QueryList,
-  AfterViewInit,
-  ElementRef
+  ElementRef,
 } from '@angular/core';
 import { wait } from '../../../../../shared/utils';
 
@@ -32,7 +32,7 @@ export class TabContentDirective {
         </a>
       </li>
     </ul>
-    <div class="active-tab-content" [innerHTML]="activeContent"></div>
+    <div class="active-tab-content"></div>
   `,
   styles: [
     `ul.nav.nav-tabs {
@@ -46,13 +46,15 @@ export class TabContentDirective {
 export class TabsComponent implements OnInit, AfterViewInit {
   public tabNames: string[] = [];
   public activeIndex = 0;
-  public activeContent: HTMLElement = null;
   @ContentChildren(TabContentDirective) private tabContents: QueryList<TabContentDirective>;
+  private activeTabContainer: HTMLElement = null;
 
   constructor(
+    private host: ElementRef,
   ) { }
 
   ngOnInit() {
+    this.activeTabContainer = this.host.nativeElement.querySelector('.active-tab-content');
   }
 
   ngAfterViewInit() {
@@ -68,14 +70,17 @@ export class TabsComponent implements OnInit, AfterViewInit {
           }
         });
         this.tabNames = tabs;
-        this.activeIndex = activeIndex;
-        this.activeContent = (<ElementRef>this.tabContents.toArray()[activeIndex].el).nativeElement;
+        this.setActive(this.activeIndex);
       })
       .catch(console.error);
   }
 
   setActive(i: number) {
     this.activeIndex = i;
-    this.activeContent = this.tabContents[i].el;
+    const activeContent: HTMLElement = (<ElementRef>this.tabContents.toArray()[i].el).nativeElement;
+    while (this.activeTabContainer.childNodes.length > 0) {
+      this.activeTabContainer.removeChild(this.activeTabContainer.childNodes[0]);
+    }
+    this.activeTabContainer.appendChild(activeContent);
   }
 }
