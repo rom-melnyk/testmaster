@@ -1,7 +1,10 @@
 import { Location } from '@angular/common';
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter, SimpleChanges, SimpleChange } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { FormModel } from '../../../models/form-element';
+import { FormModel, TextInputModel } from '../../../models/form-element';
+import { markdown } from 'markdown';
+import { debounce, map, merge } from 'rxjs/operators';
+import { of, timer } from 'rxjs';
 
 @Component({
   selector: 'tm-form',
@@ -68,7 +71,21 @@ export class FormComponent implements OnInit, OnChanges {
   private buildForm(formModel: FormModel) {
     const formGroup = (formModel || []).reduce((accum, inputModel) => {
       const validator = inputModel.required ? Validators.required : undefined;
-      accum[inputModel.name] = new FormControl(inputModel.value, validator);
+      const formControl = new FormControl(inputModel.value, validator);
+      if (inputModel.type === 'text') {
+        // prepare stream delivering compiled MarkDown
+        (<TextInputModel>inputModel).html$ = of(inputModel.value).pipe(
+          merge(
+            formControl.valueChanges.pipe(
+              debounce(() => timer(500))
+            )
+          ),
+          map((data) => {
+            return markdown.toHTML(data);
+          }),
+        );
+      }
+      accum[inputModel.name] = formControl;
       return accum;
     }, {});
     this.form = new FormGroup(formGroup);
