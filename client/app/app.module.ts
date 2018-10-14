@@ -23,9 +23,13 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { FormComponent } from './components/forms/form-builder/form.component';
 import { AttachmentsComponent } from './components/attachments/attachments.component';
 import { AttachmentCardComponent } from './components/attachments/attachment-card/attachment-card.component';
+import { TabsComponent, TabContentDirective } from './components/shared/tabs/tabs.component';
 
 @NgModule({
   declarations: [
+    TabsComponent,
+    TabContentDirective,
+
     AppComponent,
     HeaderComponent,
     FooterComponent,
