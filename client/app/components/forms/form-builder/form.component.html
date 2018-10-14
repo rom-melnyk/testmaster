@@ -16,7 +16,7 @@
               class="form-control" type="text" id="{{inputModel.name}}"
               tm-tab name="Edit" [formControlName]="inputModel.name"
             ></textarea>
-            <div tm-tab name="Preview" [innerHTML]="inputModel.html$ | async"></div>
+            <div class="description" tm-tab name="Preview" [innerHTML]="inputModel.html$ | async"></div>
           </tm-tabs>
         </ng-container>
         <div class="alert alert-danger" *ngSwitchDefault>
