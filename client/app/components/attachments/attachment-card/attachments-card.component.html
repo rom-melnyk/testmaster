@@ -13,7 +13,7 @@
       </div>
       <div class="col-4 text-right">
         <div class="btn-group btn-group-sm controls">
-          <button class="btn btn-danger" title="Delete the Attachment" (click)="deleteAttachment();">&times;</button>
+          <button class="btn btn-danger" title="Delete the Attachment" (click)="deleteAttachment();" *ngIf="mode === 'edit'">&times;</button>
           <button class="btn btn-info" title="Copy the URL" (click)="setCopyMode(true);">&lt;/&gt;</button>
         </div>
       </div>

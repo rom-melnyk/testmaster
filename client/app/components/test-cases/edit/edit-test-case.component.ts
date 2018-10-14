@@ -12,6 +12,8 @@ import { TestCasesService } from '../../../services/test-cases.service';
     <div class="container">
       <h1>{{title}}</h1>
       <tm-form [formModel]="testCaseFormModel" [onSubmit]="onSubmit" (submitted)="onSubmitted($event)"></tm-form>
+      <hr/>
+      <tm-attachments [testCaseId]="1" [mode]="'edit'"></tm-attachments>
     </div>
   `,
   styleUrls: [ './edit-test-case.component.scss' ]

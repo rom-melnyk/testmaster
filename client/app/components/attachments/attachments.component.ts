@@ -8,6 +8,7 @@ import { AttachmentModel } from '../../models/attachment.model';
   styleUrls: [ './attachments.component.scss', ]
 })
 export class AttachmentsComponent implements OnInit {
+  @Input() mode: 'view' | 'edit' = 'view';
   @Input() private testCaseId: number;
   public attachments: AttachmentModel[] = [];
   public uploadFieldLabel: string;

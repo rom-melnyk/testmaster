@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ElementRef } from '@angular/core';
 import { AttachmentModel } from '../../../models/attachment.model';
 import { AttachmentsService } from '../../../services/attachments.service';
+import { wait } from '../../../../../shared/utils';
 
 @Component({
   selector: 'tm-attachment-card',
@@ -8,6 +9,7 @@ import { AttachmentsService } from '../../../services/attachments.service';
   styleUrls: [ './attachments-card.component.scss' ]
 })
 export class AttachmentCardComponent implements OnInit {
+  @Input() mode: 'view' | 'edit' = 'view';
   @Input() attachment: AttachmentModel;
   @Output() deleted = new EventEmitter<string>();
   public isCopyMode: false;
@@ -25,10 +27,11 @@ export class AttachmentCardComponent implements OnInit {
   setCopyMode(mode) {
     this.isCopyMode = mode;
     if (mode) {
-      // wail till DOM get updated
-      setTimeout(() => {
-        AttachmentsService.copyAttachmentPath(this.inputEl, this.attachment.name);
-      }, 100);
+      wait(100) // wail till DOM get updated
+        .then(() => {
+          AttachmentsService.copyAttachmentPath(this.inputEl, '/attachments/' + this.attachment.name);
+        })
+        .catch(console.log);
     }
   }
 
