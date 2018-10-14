@@ -23,3 +23,9 @@ export function cloneOnlyKeys(object: any, keys: string[] | StringFunction): obj
       return accum;
     }, {});
 }
+
+export function wait(ms: number = 0) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
