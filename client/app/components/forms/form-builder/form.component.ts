@@ -9,7 +9,8 @@ import { FormModel } from '../../../models/form-element';
   styles: [
     `:host { display: block; }`,
     `form { display: block; }`,
-    `.submission-error-message { margin: 0 1rem 0 0; }`
+    `.submission-error-message { margin: 0 1rem 0 0; }`,
+    `textarea { min-height: 15rem; }`, // 10 lines
   ]
 })
 export class FormComponent implements OnInit, OnChanges {
