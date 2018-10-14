@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { TestCasesService } from '../../../services/test-cases.service';
 import { TestCaseModel } from '../../../models/test-case.model';
+import { markdown } from 'markdown';
 
 @Component({
   selector: 'tm-test-case',
@@ -25,7 +26,7 @@ export class OneTestCaseComponent implements OnInit {
     this.id = +this.route.snapshot.paramMap.get('id');
     this.testCasesService.getTestCase(this.id)
       .then((testCase: TestCaseModel) => {
-        this.testCase = testCase;
+        this.testCase = Object.assign(testCase, { description: markdown.toHTML(testCase.description)});
       })
       .catch((e) => {
         console.error(e);

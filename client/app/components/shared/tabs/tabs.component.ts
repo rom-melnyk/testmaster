@@ -58,7 +58,6 @@ export class TabsComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    console.log(this.tabContents.toArray());
     wait()
       .then(() => {
         const tabs: string[] = [];

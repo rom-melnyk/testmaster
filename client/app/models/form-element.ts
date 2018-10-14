@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs';
+
 export interface InputModel {
   name: string;
   value: any;
@@ -14,6 +16,8 @@ export interface StringInputModel extends InputModel {
 
 export interface TextInputModel extends InputModel {
   type: 'text';
+  html?: string;
+  html$?: Observable<string>;
 }
 
 export interface NumberInputModel extends InputModel {
