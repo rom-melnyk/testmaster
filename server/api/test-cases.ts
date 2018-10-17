@@ -1,6 +1,7 @@
 import * as express from 'express';
 import { TestCase } from '../db/models/test-case.model';
 import { testCaseAttachmentsRouter } from './test-case-attachments';
+import { Sequelize } from 'sequelize';
 
 /**
  * @api-base /api/test-cases
@@ -8,17 +9,18 @@ import { testCaseAttachmentsRouter } from './test-case-attachments';
 const testCasesRouter = express.Router();
 
 testCasesRouter.get('/', (req: express.Request, res: express.Response) => {
-  TestCase.findAll().then((testCases) => {
-    res.send(testCases);
+  TestCase.findAll().then((testCases: Sequelize.Model[]) => {
+    const formattedTestCases = testCases.map(formatTestCase);
+    res.send(formattedTestCases);
   }).catch((e) => {
     res.sendError(e, 'DB error');
   });
 });
 
 testCasesRouter.get('/:id', (req: express.Request, res: express.Response) => {
-  TestCase.findById(req.params.id).then((testCase) => {
+  TestCase.findById(req.params.id).then((testCase: Sequelize.Model) => {
     if (testCase) {
-      res.send(testCase);
+      res.send(formatTestCase(testCase));
     } else {
       return res.sendError({ status: 404 }, 'Not found');
     }
@@ -51,6 +53,7 @@ testCasesRouter.delete('/:id', (req: express.Request, res: express.Response) => 
     }).catch((e) => {
       res.sendError(e, 'DB error');
     });
+  // TODO remove attachments
 });
 
 testCasesRouter.use(
@@ -61,5 +64,11 @@ testCasesRouter.use(
   },
   testCaseAttachmentsRouter
 );
+
+function formatTestCase(testCase: Sequelize.Model) {
+  const formatted = testCase.toJSON();
+  const attachments = formatted.attachment || [];
+  return Object.assign(formatted, { attachments });
+}
 
 export { testCasesRouter };
