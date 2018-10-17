@@ -1,6 +1,5 @@
 import * as express from 'express';
 import { TestCase } from '../db/models/test-case.model';
-import { testCaseAttachmentsRouter } from './test-case-attachments';
 import { Sequelize } from 'sequelize';
 
 /**
@@ -30,15 +29,23 @@ testCasesRouter.get('/:id', (req: express.Request, res: express.Response) => {
 });
 
 testCasesRouter.post('/', (req: express.Request, res: express.Response) => {
-  TestCase.create(req.body).then((result) => {
-    res.send(result.toJSON());
+  const testCase = Object.assign({}, req.body);
+  testCase.attachments = testCase.attachments || [];
+
+  TestCase.create(testCase).then((result) => {
+    res.send(formatTestCase(result));
   }).catch((e) => {
     res.sendError(e, 'DB error');
   });
 });
 
 testCasesRouter.put('/:id', (req: express.Request, res: express.Response) => {
-  TestCase.update(req.body, { where: { id: req.params.id } })
+  const testCase = Object.assign({}, req.body);
+  if (testCase.attachments !== undefined && !testCase.attachments) {
+    testCase.attachments = [];
+  }
+
+  TestCase.update(testCase, { where: { id: req.params.id } })
     .then(([ updated ]) => {
       res.send({ updated });
     }).catch((e) => {
@@ -56,18 +63,9 @@ testCasesRouter.delete('/:id', (req: express.Request, res: express.Response) => 
   // TODO remove attachments
 });
 
-testCasesRouter.use(
-  '/:id/attachments',
-  (req: express.Request, res: express.Response, next: () => any) => {
-    req.testCaseId = req.params.id;
-    next();
-  },
-  testCaseAttachmentsRouter
-);
-
 function formatTestCase(testCase: Sequelize.Model) {
   const formatted = testCase.toJSON();
-  const attachments = formatted.attachment || [];
+  const attachments = formatted.attachments || [];
   return Object.assign(formatted, { attachments });
 }
 

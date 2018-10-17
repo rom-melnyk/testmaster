@@ -12,7 +12,7 @@ import * as cookieParser from 'cookie-parser';
 import * as fileUpload from 'express-fileupload';
 
 import { resSendError, getAvailablePaths, sendIndexHtml, } from './api/middleware';
-import { singleAttachmentRouter } from './api/single-attachment';
+import { attachmentsRouter } from './api/attachments';
 import { testCasesRouter } from './api/test-cases';
 // import { testSuitesRouter } from './api/test-suites';
 // import { testPlansRouter } from './api/test-plans';
@@ -30,12 +30,11 @@ app.use(resSendError());
 const staticPath = path.join(__dirname, '../client-compiled');
 app.use(express.static(staticPath));
 
-app.use(`/attachments`, singleAttachmentRouter);
-
 app.use(`/api/${Paths.TestCases.ALL}`, testCasesRouter);
 // app.use(`/api/${Paths.TestSuites.ALL}`, testSuitesRouter);
 // app.use(`/api/${Paths.TestPlans.ALL}`, testPlansRouter);
 // app.use(`/api/${Paths.RegressionCycles.ALL}`, regressionCyclesRouter);
+app.use(`/api/attachments`, attachmentsRouter);
 
 const availablePaths = getAvailablePaths();
 app.get(availablePaths, sendIndexHtml(staticPath));
