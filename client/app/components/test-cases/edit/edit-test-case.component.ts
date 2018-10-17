@@ -1,10 +1,11 @@
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormModel } from '../../../models/form-element';
-import { TestCaseFormModel } from '../../../models/test-case.model';
+import { TestCaseFormModel, TestCaseModel } from '../../../models/test-case.model';
 import { createFormModel } from '../../forms/form-model-creator';
 import { TestCasesService } from '../../../services/test-cases.service';
+import { AttachmentsComponent } from '../../attachments/attachments.component';
 
 @Component({
   selector: 'tm-new-test-case',
@@ -13,15 +14,19 @@ import { TestCasesService } from '../../../services/test-cases.service';
       <h1>{{title}}</h1>
       <tm-form [formModel]="testCaseFormModel" [onSubmit]="onSubmit" (submitted)="onSubmitted($event)"></tm-form>
       <hr/>
-      <tm-attachments [testCaseId]="1" [mode]="'edit'"></tm-attachments>
+      <tm-attachments [attachments]="attachments" [mode]="'edit'" (updated)="onAttachmentsUpdated($event)"></tm-attachments>
     </div>
   `,
   styleUrls: [ './edit-test-case.component.scss' ]
 })
 export class EditTestCaseComponent implements OnInit {
   public title: string;
+  public attachments: string[] = [];
   public testCaseFormModel: FormModel;
   public onSubmit: (data: any) => Promise<any>;
+  public onAttachmentsUpdated: (attachments: string[]) => Promise<any>;
+
+  @ViewChild(AttachmentsComponent) private attachmentsComponent: AttachmentsComponent;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,23 +35,15 @@ export class EditTestCaseComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id === 'new') {
-      this.title = 'New Test Case';
-      this.onSubmit = (testCase) => {
-        return this.testCasesService.createTestCase(testCase);
-      };
-      this.testCaseFormModel = createFormModel(TestCaseFormModel);
+    const idParam = this.route.snapshot.paramMap.get('id');
+    if (idParam === 'new') {
+      this.setupNewTestCase();
     } else {
-      this.title = `Test Case ${id}`;
-      this.onSubmit = (testCase) => {
-        return this.testCasesService.updateTestCase({ id, ...testCase });
-      };
-      this.testCasesService.getTestCase(+id)
-        .then((testCase) => {
-          this.testCaseFormModel = createFormModel(TestCaseFormModel, testCase);
-        })
-        .catch(console.error);
+      const id = Number.parseInt(idParam, 10);
+      if (isNaN(id)) {
+        throw new Error(`Bad id: "${idParam}"`);
+      }
+      this.setupEditTestCase(id);
     }
   }
 
@@ -54,5 +51,33 @@ export class EditTestCaseComponent implements OnInit {
     if (result) {
       this.location.back();
     }
+  }
+
+  setupNewTestCase() {
+    this.title = 'New Test Case';
+    this.onSubmit = (formData) => {
+      const attachments = this.attachmentsComponent.attachments;
+      return this.testCasesService.createTestCase({ ...formData, attachments });
+    };
+    this.onAttachmentsUpdated = () => Promise.resolve();
+    this.testCaseFormModel = createFormModel(TestCaseFormModel);
+  }
+
+  setupEditTestCase(id: number) {
+    this.title = `Test Case ${id}`;
+    this.onSubmit = (formData) => {
+      const attachments = this.attachmentsComponent.attachments;
+      return this.testCasesService.updateTestCase({ id, ...formData, attachments });
+    };
+    this.onAttachmentsUpdated = (attachments: string[]) => {
+      return this.testCasesService.updateTestCase({ id, attachments } as TestCaseModel)
+        .catch(console.error);
+    };
+    this.testCasesService.getTestCase(id)
+      .then((testCase) => {
+        this.attachments = testCase.attachments;
+        this.testCaseFormModel = createFormModel(TestCaseFormModel, testCase);
+      })
+      .catch(console.error);
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ElementRef } from '@angular/core';
-import { AttachmentModel } from '../../../models/attachment.model';
 import { AttachmentsService } from '../../../services/attachments.service';
 import { wait } from '../../../../../shared/utils';
+import { SafeStyle } from '@angular/platform-browser';
 
 @Component({
   selector: 'tm-attachment-card',
@@ -10,9 +10,10 @@ import { wait } from '../../../../../shared/utils';
 })
 export class AttachmentCardComponent implements OnInit {
   @Input() mode: 'view' | 'edit' = 'view';
-  @Input() attachment: AttachmentModel;
+  @Input() attachment: string;
   @Output() deleted = new EventEmitter<string>();
-  public isCopyMode: false;
+  public url: string;
+  public bgImage: SafeStyle;
   private inputEl: HTMLInputElement;
 
   constructor(
@@ -21,25 +22,26 @@ export class AttachmentCardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.url = `${AttachmentsService.URL}/${this.attachment}`;
+    this.bgImage = this.attachmentsService.getBackgroundImage(this.attachment);
     this.inputEl = this.el.nativeElement.querySelector('input');
   }
 
-  setCopyMode(mode) {
-    this.isCopyMode = mode;
-    if (mode) {
-      wait(100) // wail till DOM get updated
-        .then(() => {
-          AttachmentsService.copyAttachmentPath(this.inputEl, '/attachments/' + this.attachment.name);
-        })
-        .catch(console.log);
-    }
+  copyAttachmentUrl() {
+    wait(100) // wail till DOM get updated
+      .then(() => {
+        AttachmentsService.copyAttachmentPath(this.inputEl, this.attachment);
+      })
+      .catch(console.error);
   }
 
   deleteAttachment() {
-    if (confirm(`Sure to delete the "${this.attachment.name}"?`)) {
-      this.attachmentsService.deleteAttachment(this.attachment.name)
-        .then(() => {
-          this.deleted.emit(this.attachment.name);
+    if (confirm(`Sure to delete the "${this.attachment}"?`)) {
+      this.attachmentsService.deleteAttachment(this.attachment)
+        .then((result) => {
+          if (result) {
+            this.deleted.emit(this.attachment);
+          }
         })
         .catch(console.error);
     }

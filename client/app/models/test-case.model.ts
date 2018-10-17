@@ -4,6 +4,8 @@ export interface TestCaseModel {
   id: number;
   title: string;
   description: string;
+  attachments: string[];
+  createdAt: Date;
 }
 
 export const TestCaseFormModel: FormModel = [

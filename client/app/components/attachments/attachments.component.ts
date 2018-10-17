@@ -1,6 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { AttachmentsService } from '../../services/attachments.service';
-import { AttachmentModel } from '../../models/attachment.model';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { AttachmentsService, UploadResults } from '../../services/attachments.service';
 
 @Component({
   selector: 'tm-attachments',
@@ -9,8 +8,9 @@ import { AttachmentModel } from '../../models/attachment.model';
 })
 export class AttachmentsComponent implements OnInit {
   @Input() mode: 'view' | 'edit' = 'view';
-  @Input() private testCaseId: number;
-  public attachments: AttachmentModel[] = [];
+  @Input() attachments: string[] = [];
+  @Output() updated = new EventEmitter<string[]>();
+
   public uploadFieldLabel: string;
 
   constructor(
@@ -18,15 +18,6 @@ export class AttachmentsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadAttachments();
-  }
-
-  loadAttachments() {
-    this.attachmentsService.getAttachmentsForTestCase(this.testCaseId)
-      .then((attachments) => {
-        this.attachments = attachments;
-      })
-      .catch(console.error);
   }
 
   updateUploadLabel(files: FileList | undefined[]) {
@@ -34,12 +25,18 @@ export class AttachmentsComponent implements OnInit {
   }
 
   uploadFile(fileInput: HTMLInputElement) {
-    this.attachmentsService.uploadAttachmentsForTestCase(this.testCaseId, fileInput.files)
-      .then(() => {
-        this.loadAttachments();
+    this.attachmentsService.uploadAttachmentsForTestCase(fileInput.files)
+      .then((result: UploadResults) => {
+        this.attachments = [ ...this.attachments, ...result.uploaded ];
+        this.updated.emit(this.attachments);
         fileInput.value = null;
         this.updateUploadLabel([]);
       })
       .catch(console.error);
+  }
+
+  deleteAttachment(deleted: string) {
+    this.attachments = this.attachments.filter(name => name !== deleted);
+    this.updated.emit(this.attachments);
   }
 }

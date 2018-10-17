@@ -20,7 +20,7 @@
     </div>
     <div class="description" [innerHTML]="testCase.description"></div>
     <hr/>
-    <tm-attachments [testCaseId]="testCase.id" [mode]="'view'"></tm-attachments>
+    <tm-attachments [attachments]="testCase.attachments" [mode]="'view'"></tm-attachments>
   </ng-container>
   <div class="alert alert-danger" *ngIf="!isLoading && !testCase">
     Error loading Test Case {{id}} :-(
