@@ -8,7 +8,7 @@ Create it manually before starting the server.
   "database": {
     "host": "...",
     "database": "...",
-    "user": "...",
+    "username": "...",
     "password": "...",
     "port": ...,
     "dialect": "mysql"
