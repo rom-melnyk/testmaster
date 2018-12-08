@@ -4,7 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const baseConfig = {
-  entry: './client/index.ts',
+  entry: './client/index.tsx',
   mode: 'development',
   module: {
     rules: [
