@@ -26,7 +26,7 @@ Client app is an Angular 6 app. The NG-CLI task compiles it into `client-compile
 ## Setup
 
 1. Make sure the MySQL server is installed.
-1. Create the databese. Check the [DB manual file](docs/WORK_WITH_DB.md).
+1. Create the database. Check the [DB manual file](docs/WORK_WITH_DB.md).
 1. Clone the project and run `npm install` in the project folder to install dependencies.
 1. Create `server/config.json` (see [appropriate doc](docs/CONFIG.md)).  
    Make sure field values correspond to what you entered right before.
